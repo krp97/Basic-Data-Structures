@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "DoubleLinkedList.h"
+#include "DoublyLinkedList.h"
 #include <iostream>
 
 
-DoubleLinkedList::DoubleLinkedList()
+DoublyLinkedList::DoublyLinkedList()
 {
 	head = nullptr;
 	tail = nullptr;
 }
 
-void DoubleLinkedList::pushFront(int value)
+void DoublyLinkedList::pushFront(int value)
 {
 	NodeDL* p = new NodeDL(value, nullptr, head);
 
@@ -25,7 +25,7 @@ void DoubleLinkedList::pushFront(int value)
 	head = p;				// ustawienie nowej glowy listy
 }
 
-void DoubleLinkedList::pushBack(int value)
+void DoublyLinkedList::pushBack(int value)
 {
 	NodeDL* p = new NodeDL(value, tail, nullptr);
 
@@ -41,7 +41,7 @@ void DoubleLinkedList::pushBack(int value)
 	tail = p;				// ustawienie nowego ogona
 }
 
-void DoubleLinkedList::pushAt(int value, int index)		// wstawienie przed podanym indeksem
+void DoublyLinkedList::pushAt(int value, int index)		// wstawienie przed podanym indeksem
 {
 	if (index == 0)					
 		pushFront(value);
@@ -64,7 +64,7 @@ void DoubleLinkedList::pushAt(int value, int index)		// wstawienie przed podanym
 	}
 }
 
-void DoubleLinkedList::popFront()
+void DoublyLinkedList::popFront()
 {
 	if (getCount() > 0)
 	{
@@ -83,7 +83,7 @@ void DoubleLinkedList::popFront()
 	}
 }
 
-void DoubleLinkedList::popBack()
+void DoublyLinkedList::popBack()
 {
 	if (getCount() > 0)
 	{
@@ -102,7 +102,7 @@ void DoubleLinkedList::popBack()
 	}
 }
 
-void DoubleLinkedList::popAt(int index)		// usuniecie przed podanym indeksem
+void DoublyLinkedList::popAt(int index)		// usuniecie przed podanym indeksem
 {
 	if (index == 0)						
 		popFront();
@@ -125,7 +125,7 @@ void DoubleLinkedList::popAt(int index)		// usuniecie przed podanym indeksem
 	}
 }
 
-int DoubleLinkedList::find(int value)
+int DoublyLinkedList::find(int value)
 {
 	NodeDL* p = head;
 	int index = 0;
@@ -141,7 +141,7 @@ int DoubleLinkedList::find(int value)
 	return 0; 
 }
 
-void DoubleLinkedList::display()
+void DoublyLinkedList::display()
 {
 	NodeDL* p = head;
 
@@ -151,7 +151,7 @@ void DoubleLinkedList::display()
 		p = p->next;
 	}
 }
-int DoubleLinkedList::getCount()
+int DoublyLinkedList::getCount()
 {
 	int count = 0;
 	NodeDL* p = head;
@@ -164,6 +164,6 @@ int DoubleLinkedList::getCount()
 	return count;
 }
 
-DoubleLinkedList::~DoubleLinkedList()
+DoublyLinkedList::~DoublyLinkedList()
 {
 }

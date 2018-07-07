@@ -1,16 +1,20 @@
 #pragma once
-class NodeDL
+#include "Node.h"
+class NodeDL : private Node
 {
-	friend class DoubleLinkedList;
+	friend class DoublyLinkedList;
 	friend class Heap;
 
 private:
-	int value;		// wartosc
-	NodeDL * prev;	// poprzedni wezel
-	NodeDL * next;	// nastepny wezel
+	NodeDL * prev;	
+	NodeDL * next;
 
 public:
 	NodeDL(int value, NodeDL * prev, NodeDL * next);
+
+	virtual std::string toString() override;
+	int getvalue();
+
 	~NodeDL();
 };
 

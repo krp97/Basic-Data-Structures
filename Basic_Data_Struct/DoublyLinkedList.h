@@ -1,6 +1,6 @@
 #pragma once
 #include "NodeDL.h"
-class DoubleLinkedList
+class DoublyLinkedList
 {
 private:
 
@@ -9,7 +9,7 @@ private:
 
 public:
 
-	DoubleLinkedList();
+	DoublyLinkedList();
 
 	void pushFront(int value);				// Dodawanie na poczatku
 	void pushBack(int value);				// Dodawanie na koncu
@@ -25,6 +25,6 @@ public:
 
 	int getCount();				// Zwrocenie ilosci wezlow
 
-	~DoubleLinkedList();
+	~DoublyLinkedList();
 };
 

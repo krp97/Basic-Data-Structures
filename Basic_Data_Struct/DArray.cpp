@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "DArray.h"
-//---Display & Warnings--
+//---toString-------
 #include <iostream>	
 #include <string>        
-//-----------------------
+//------------------
 #include <exception>
+#include <fstream>
 
 struct EmptyArrException : public std::exception {
 	const char * description() const throw () {
@@ -142,18 +143,13 @@ void DArray::popAt(int index)
 		dArray = tempArray;	
 	}
 }
-void DArray::display()
+std::string DArray::toString()
 {
+	std::string output = "|"; // First character
+
 	if (size > 0)
-	{
-		std::cout << std::string(size * 3, '-') << std::endl;
-		std::cout << '|';
 		for (auto arrIt = dArray; (int*)arrIt - (int*)dArray < size; ++arrIt)
-		{
-			std::cout << *arrIt << '|';
-		}
-		std::cout << std::endl << std::string(size * 3, '-') << std::endl;
-	}
+			output += *arrIt + '|';
 	else
 		throw EmptyArrException();
 }
@@ -179,6 +175,64 @@ int DArray::lookUpValue(int value)
 				return counter;
 		}
 	}
+}
+void DArray::loadFromFile(std::string fileName)
+{
+	std::ifstream fileToRead;
+	std::string line;
+	int value = 0;
+	
+	// All exceptions are rethrown for the caller to handle it or call apropriate handlers.
+	// In case of any error the input data is unusable, so there is no point in continuing.
+
+	try {
+
+		fileToRead.open(fileName);
+
+		while (!fileToRead.eof())
+		{
+			fileToRead >> line;
+			try
+			{
+				value = stoi(line);
+			}
+			catch (std::invalid_argument& e)
+			{
+				fileToRead.close();
+				throw;
+			}
+			catch (...)
+			{
+				fileToRead.close();
+				throw;
+			}
+			this->pushBack(value);
+		}
+	}
+	catch (std::ios_base::failure &fail)
+	{
+		throw;
+	}
+
+	fileToRead.close();
+}
+void DArray::saveToFile(std::string fileName)
+{
+	std::ofstream fileToWrite;
+	int * ptr = this->dArray;
+
+	try
+	{
+		fileToWrite.open(fileName);
+
+		for (int arrIt = 0; arrIt < this->size; ++arrIt)
+			fileToWrite << *(ptr + arrIt);
+	}
+	catch (std::ios_base::failure &fail)
+	{
+		throw;
+	}
+	fileToWrite.close();
 }
 DArray::~DArray()
 {

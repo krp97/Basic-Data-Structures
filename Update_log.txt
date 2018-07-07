@@ -1,0 +1,4 @@
+1) 7 July, 2018
+	- Cleanup of Dynamic Array class 
+	- Added Node abstract class to correct the logic structure
+	- Added file handling functions

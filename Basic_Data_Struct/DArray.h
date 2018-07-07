@@ -1,10 +1,11 @@
 #pragma once
+#include <string>
 class DArray
 {
+	friend class Heap;
 private:
 	int* dArray;
 	int size;
-
 public:
 
 	void pushFront(int value);			
@@ -15,10 +16,13 @@ public:
 	void popBack();						
 	void popAt(int index);				
 
-	void display();						
+	std::string toString();						
 	
 	int lookUpIndex(int index);			
 	int lookUpValue(int value);			
+
+	void loadFromFile(std::string fileName);
+	void saveToFile(std::string fileName);
 
 	DArray(int size);
 	~DArray();

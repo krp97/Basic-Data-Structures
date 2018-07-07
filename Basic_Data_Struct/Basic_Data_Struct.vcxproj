@@ -148,8 +148,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DArray.h" />
-    <ClInclude Include="DoubleLinkedList.h" />
+    <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Heap.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="NodeDL.h" />
     <ClInclude Include="NodeSL.h" />
     <ClInclude Include="R_BNode.h" />
@@ -161,7 +162,7 @@
   <ItemGroup>
     <ClCompile Include="Basic_Data_Struct.cpp" />
     <ClCompile Include="DArray.cpp" />
-    <ClCompile Include="DoubleLinkedList.cpp" />
+    <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="NodeDL.cpp" />
     <ClCompile Include="NodeSL.cpp" />
