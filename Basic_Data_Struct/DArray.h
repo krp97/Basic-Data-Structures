@@ -19,6 +19,10 @@ public:
 	int lookUpIndex(int index);			// Wyszukanie wartosci
 	int lookUpValue(int value);			// Zwrocenie wartosci pod indeksem
 
+	// proposed to do:
+	// void joinArrays(array_one**, array_two**);
+	// void subArray(int start_index, int end_index, array**);
+
 	DArray(int size);
 	~DArray();
 };

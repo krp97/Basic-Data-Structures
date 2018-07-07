@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
     <ClInclude Include="DArray.h" />
     <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="Heap.h" />
@@ -160,7 +159,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Basic_Data_Struct.cpp" />
     <ClCompile Include="DArray.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />

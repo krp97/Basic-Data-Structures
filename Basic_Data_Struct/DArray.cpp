@@ -12,25 +12,27 @@ DArray::DArray(int size)
 void DArray::pushFront(int value)
 {
 	size++;
-	int *tempArray = new int[size];		// zaalokowanie	tablicy o nowym rozmiarze
-
+	int *tempArray = new int[size];
+	
+	// copy the old array into the new one offset by one element
 	*tempArray = value;					
-	memcpy(tempArray + 1, dArray, (size-1)*sizeof(int));	// skopiowanie zawartosci z poprzedniej tablicy do nowej
+	memcpy(tempArray + 1, dArray, (size-1)*sizeof(int));
 
-	delete[] dArray;					// zwolnienie pamieci zajmowanej przez poprzednia tablice
-	dArray = tempArray;					// przypisanie adresu do aktualnej tablicy
+	// update the array pointer
+	delete[] dArray;					
+	dArray = tempArray;					
 }
 
 void DArray::pushBack(int value)
 {
 	size++;
-	int *tempArray = new int[size];		// zaalokowanie tablicy o nowym rozmiarze
+	int *tempArray = new int[size];
+		
+	*(tempArray + (size-1)) = value;	
+	memcpy(tempArray, dArray, (size - 1) * sizeof(int));
 
-	*(tempArray + (size-1)) = value;	// przypisanie wartosci do ostatniego elementu w nowej tablicy
-	memcpy(tempArray, dArray, (size - 1) * sizeof(int));	// przekopiowanie zawartosci z poprzedniej tablicy
-
-	delete[] dArray;					// zwolnienie pamieci zajmowanej przez poprzednia tablice
-	dArray = tempArray;					// przypisanie adresu do aktualnej tablicy
+	delete[] dArray;				
+	dArray = tempArray;					
 }
 
 void DArray::pushAt(int value, int index)
