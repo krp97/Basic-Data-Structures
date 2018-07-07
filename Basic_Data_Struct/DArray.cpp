@@ -1,7 +1,16 @@
 #include "stdafx.h"
 #include "DArray.h"
-#include <iostream>
+//---Display & Warnings--
+#include <iostream>	
+#include <string>        
+//-----------------------
+#include <exception>
 
+struct EmptyArrException : public std::exception {
+	const char * description() const throw () {
+		return "Empty array exception.";
+	}
+};
 
 DArray::DArray(int size)
 {
@@ -14,11 +23,12 @@ void DArray::pushFront(int value)
 	size++;
 	int *tempArray = new int[size];
 	
-	// copy the old array into the new one offset by one element
+	// Copy the contents of the old array into the new array,
+	// keeping in mind that the first element is already assigned.
 	*tempArray = value;					
-	memcpy(tempArray + 1, dArray, (size-1)*sizeof(int));
+	memcpy(tempArray + 1, dArray, (size - 1) * sizeof(int));
 
-	// update the array pointer
+	// Updating the current array pointer.
 	delete[] dArray;					
 	dArray = tempArray;					
 }
@@ -27,43 +37,43 @@ void DArray::pushBack(int value)
 {
 	size++;
 	int *tempArray = new int[size];
-		
-	*(tempArray + (size-1)) = value;	
+	
+	// Copy the contents of the old array into the new array.
+	// New element is added at the last position.
+	*(tempArray + (size - 1)) = value;	
 	memcpy(tempArray, dArray, (size - 1) * sizeof(int));
 
+	// Updating the current array pointer.
 	delete[] dArray;				
 	dArray = tempArray;					
 }
 
 void DArray::pushAt(int value, int index)
 {
-	if (index < size && index >= 0)		// restrykcje podanych danych					
+	if (dArray == nullptr)
+		throw EmptyArrException();
+	if (index < size && index >= 0)					
 	{
-		if (dArray == nullptr)			// tablica jest pusta
-		{
-			size++;
-			dArray = new int[size];			
-
-			*dArray = value;
-
-			return;
-		}
-		else if (index == 0)			// jesli podany jest index: 0 lub (size + 1) to nastepuje pushFront lub pushBack 
+		if (index == 0)			// Reusing existing methods for boundary cases.
 			pushFront(value);
 		else if (index == size)
 			pushBack(value);
 		else
 		{
 			size++;
-			int *tempArray = new int[size];	// zalokowanie tablicy o nowym rozmiarze
+			int *tempArray = new int[size]; 
 
-			*(tempArray + index) = value;	// przypisanie wartosci do komorki o zadanym indeksie
+			*(tempArray + index) = value;
+			
+			// Copying contents of the old array in two parts:
+			// 1) Elements: 0->index (left inclusive right exclusive)
+			// 2) Rest of the array
+			memcpy(tempArray, dArray, index * sizeof(int));		
+			memcpy(tempArray + index + 1, dArray + index, (size - index) * sizeof(int));	
 
-			memcpy(tempArray, dArray, index * sizeof(int));		// przekopiowanie zawartosci z poprzedniej tablicy do zadanego indeksu
-			memcpy(tempArray + index + 1, dArray + index, (size - index) * sizeof(int));	// przekopiowanie zawartosci od zadanego indeksu
-
-			delete[] dArray;				// zwolnienie pamieci zajmowanej przez poprzednia tablice
-			dArray = tempArray;				// zaktualizowanie wskaznika na tablice
+			// Updating the array pointer.
+			delete[] dArray;				
+			dArray = tempArray;				
 
 			return;
 		}
@@ -73,78 +83,93 @@ void DArray::popFront()
 {
 	if (size > 0)
 	{
+		// Copying elements from the old array into the new shrinked array.
+		// The first element is left out, hence dArray + 1 in memcpy.
 		size--;
-		int *tempArray = new int[size];		// zalokowanie tablicy o nowym rozmiarze
+		int *tempArray = new int[size];
 
-		memcpy(tempArray, dArray + 1, size * sizeof(int));	// przekopiowanie zawartosci z poprzedniej tablicy bez pierwszego elementu
+		memcpy(tempArray, dArray + 1, size * sizeof(int));
 
-		delete[] dArray;				// zwolnienie pamieci zajmowanej przez poprzednia tablice
-		dArray = tempArray;				// zaktualizowanie wskaznika na tablice
+		// Updating the array pointer.
+		delete[] dArray;
+		dArray = tempArray;
 
 		return;
 	}
+	else
+		throw EmptyArrException();
 }
 void DArray::popBack()
 {
 	if (size > 0)
 	{
+		// Copying elements from the old array into the new shrinked array.
+		// The updated size is passed into memcpy, since the last element is left out.
+
 		size--;
-		int *tempArray = new int[size];		// zalokowanie nowej tablicy o nowym rozmiarze
+		int *tempArray = new int[size];
 
-		memcpy(tempArray, dArray, size * sizeof(int));	// przekopiowanie zawartosci z poprzedniej tablicy oprocz ostatniego elementu
+		memcpy(tempArray, dArray, size * sizeof(int));
 
-		delete[] dArray;					// zwolnienie pamieci zajmowanej przez poprzednia tablice
-		dArray = tempArray;					// zaktualizowanie wskaznika na tablice
+		delete[] dArray;
+		dArray = tempArray;
 
 		return;
 	}
+	else
+		throw EmptyArrException();
 }
 void DArray::popAt(int index)
 {
-	if (index == 0)
+	if (dArray == nullptr)
+		throw EmptyArrException();
+	// Reusing existing methods for boundary cases.
+	if (index == 0)				
 		popFront();
 	else if (index == size - 1)
 		popBack();
 	else if (index < size && index > 0)
 	{
 		size--;
-		int *tempArray = new int[size];					// alokacja tablicy o nowym rozmiarze
-
-		memcpy(tempArray, dArray, index * sizeof(int));						 // linie 110,111: przekopiowanie zawartosci z poprzedniej tablicy
-		memcpy(tempArray + index + 1, dArray, (size - index) * sizeof(int)); // z pominieciem elementu o zadanym indeksie
+		int *tempArray = new int[size];					
 		
-		delete[] dArray;	// zwolnienie pamieci zajmowanej przez poprzednia tablice
-		dArray = tempArray;	// zaktualizowanie wskaznika na tablice
+		// Important bit: second memcpy contains (size - index + 1) to compensate for size shrinking.
+		// Without it the last element of the array is left out.
+		memcpy(tempArray, dArray, index * sizeof(int));
+		memcpy(tempArray + index + 1, dArray, (size - index + 1) * sizeof(int));
+		
+		delete[] dArray;	
+		dArray = tempArray;	
 	}
 }
 void DArray::display()
 {
-	int *p = dArray;
-	int counter = 0;
-	while (counter < size)
+	if (size > 0)
 	{
-		std::cout << *p << "|";
-		p++;
-		counter++;
+		std::cout << std::string(size * 3, '-') << std::endl;
+		std::cout << '|';
+		for (auto arrIt = dArray; (int*)arrIt - (int*)dArray < size; ++arrIt)
+		{
+			std::cout << *arrIt << '|';
+		}
+		std::cout << std::endl << std::string(size * 3, '-') << std::endl;
 	}
+	else
+		throw EmptyArrException();
 }
-int DArray::lookUpIndex(int index)		// zwrocenie wartosci znajdujacej sie pod danym indeksem w tablicy
+int DArray::lookUpIndex(int index)
 {
 	if (size == 0)
-		std::cout << "Tablica jest pusta. \n";
+		throw EmptyArrException();
 	else if (index <size && index > 0)
 	{
 		return *((this->dArray) + index);
 	}
-	else
-	{
-		std::cout << "Podano niepoprawny indeks. \n";
-	}
 }
-int DArray::lookUpValue(int value)		// zwrocenie indeksu pierwszego wystapienia zadanej wartosci
+int DArray::lookUpValue(int value)
 {
-	if(size == 0)
-		return NULL;
+	if (size == 0)
+		throw EmptyArrException();
 	else
 	{
 		int counter = 0;
@@ -157,5 +182,5 @@ int DArray::lookUpValue(int value)		// zwrocenie indeksu pierwszego wystapienia 
 }
 DArray::~DArray()
 {
-
+	delete [] this->dArray;
 }

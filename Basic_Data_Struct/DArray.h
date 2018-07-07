@@ -1,27 +1,24 @@
 #pragma once
 class DArray
 {
-public:
-
-	int* dArray;			
+private:
+	int* dArray;
 	int size;
 
-	void pushFront(int value);			// Dodawanie na poczatku
-	void pushBack(int value);			// Dodawanie na koncu
-	void pushAt(int value, int index);	// Dodawanie przed indeksem 
+public:
 
-	void popFront();					// Usuwanie poczatku
-	void popBack();						// Usuwanie konca
-	void popAt(int index);				// Usuwanie elementu przed indeksem
+	void pushFront(int value);			
+	void pushBack(int value);			
+	void pushAt(int value, int index);	
 
-	void display();						// Wyswietlenie
+	void popFront();					
+	void popBack();						
+	void popAt(int index);				
+
+	void display();						
 	
-	int lookUpIndex(int index);			// Wyszukanie wartosci
-	int lookUpValue(int value);			// Zwrocenie wartosci pod indeksem
-
-	// proposed to do:
-	// void joinArrays(array_one**, array_two**);
-	// void subArray(int start_index, int end_index, array**);
+	int lookUpIndex(int index);			
+	int lookUpValue(int value);			
 
 	DArray(int size);
 	~DArray();
