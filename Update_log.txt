@@ -2,3 +2,12 @@
 	- Cleanup of Dynamic Array class 
 	- Added Node abstract class to correct the logic structure
 	- Added file handling functions
+2) 8 July, 2018
+	- Redesigned logic structure and relations between classes
+	- Refactoring:
+		+ Changed names of files to better represent current logic structure
+	- Changed the approach to memory allocation:
+		+ The array is now characterized by an added attribute "maxSize".
+		  This provides an actual size of a block of memory allocated.
+		  The Array is no longer reallocated with each push and pop,
+		  but preallocated with a bigger size.(See code comments in Array for more).
