@@ -1,12 +1,12 @@
 ﻿#include "stdafx.h"
-#include "Heap.h"
+/*#include "Heap.h"
 #include <Math.h>
 #include <iostream>
 
 
 void Heap::pushValue(int value) 
 {
-	this->heapArray->pushBack(value);		// dodanie elementu jako ostatni 
+	this->arrPtr->pushBack(value);		// dodanie elementu jako ostatni 
 	this->nodeCount++;
 
 	if (nodeCount > 1)
@@ -15,8 +15,8 @@ void Heap::pushValue(int value)
 
 void Heap::popRoot()
  {
-	*(this->heapArray->dArray) = *(this->heapArray->dArray + nodeCount-1);
-	this->heapArray->popBack();
+	*(this->arrPtr->arrPtr) = *(this->arrPtr->arrPtr + nodeCount-1);
+	this->arrPtr->popBack();
 	nodeCount--;
 	if (nodeCount > 1)
 		fixDown(0);							// naprawa kopca w dol od poczatku
@@ -31,12 +31,12 @@ void Heap::swap(int* parent, int* child)
 }
 int* Heap::heapCond(int index)	// sprawdzenie, czy spelniony jest warunek kopca dla zadanego wezla
 {
-	int *p = this->heapArray->dArray + index;	
+	int *p = this->arrPtr->arrPtr + index;	
 	int *pRightChild = getRightChild(index);
 	int *pLeftChild = getLeftChild(index); 
 
-	std::ptrdiff_t rightChildIndex = pRightChild - this->heapArray->dArray;
-	std::ptrdiff_t leftChildIndex = pLeftChild - this->heapArray->dArray;
+	std::ptrdiff_t rightChildIndex = pRightChild - this->arrPtr->arrPtr;
+	std::ptrdiff_t leftChildIndex = pLeftChild - this->arrPtr->arrPtr;
 
 	if (*p >= *pRightChild && *p >= *pLeftChild)	// jesli wartosci obu synow sa mniejsze od rodzica
 		return nullptr;
@@ -51,7 +51,7 @@ int* Heap::heapCond(int index)	// sprawdzenie, czy spelniony jest warunek kopca 
 }
 void Heap::fixDown(int index)
 {
-	int *p = this->heapArray->dArray + index;
+	int *p = this->arrPtr->arrPtr + index;
 	int *childToSwap = nullptr;		
 
 	int levelCounter = index;							
@@ -65,7 +65,7 @@ void Heap::fixDown(int index)
 
 		if (childToSwap != nullptr)
 		{
-			tempIndex = childToSwap - (this->heapArray->dArray);	// index syna z ktorym zamieniana jest pozycja
+			tempIndex = childToSwap - (this->arrPtr->arrPtr);	// index syna z ktorym zamieniana jest pozycja
 			swap(p, childToSwap);	
 			index = tempIndex;
 			p = childToSwap;	// wskaznik na pozycje z ktora zamieniono wartosci
@@ -75,13 +75,13 @@ void Heap::fixDown(int index)
 }
 void Heap::fixUp(int index)
 {
-	int * p = this->heapArray->dArray + index; // wskaznik pomocniczy na aktualny wezel/lisc
+	int * p = this->arrPtr->arrPtr + index; // wskaznik pomocniczy na aktualny wezel/lisc
 
-	while (*p > *(this->heapArray->dArray + getParent(index)) && getParent(index) >= 0) // porownanie wartosci tego wezla z wartoscia rodzica
+	while (*p > *(this->arrPtr->arrPtr + getParent(index)) && getParent(index) >= 0) // porownanie wartosci tego wezla z wartoscia rodzica
 	{
-		swap(this->heapArray->dArray + getParent(index), p);	// zamiana miejscami
+		swap(this->arrPtr->arrPtr + getParent(index), p);	// zamiana miejscami
 		index = getParent(index);								// ustawienie indexu na aktualna pozycje 
-		p = this->heapArray->dArray + index;					// przestawienie wskaznika pomocnicznego
+		p = this->arrPtr->arrPtr + index;					// przestawienie wskaznika pomocnicznego
 	}
 }
 
@@ -92,12 +92,12 @@ int Heap::getParent(int index) // zwroc indeks rodzica
 
 int* Heap::getRightChild(int index)	// zwroc wskaznik na prawego syna
 {
-	return this->heapArray->dArray+2*index + 2;
+	return this->arrPtr->arrPtr+2*index + 2;
 }
 
 int* Heap::getLeftChild(int index)	// zwroc wskaznik na lewego syna
 {
-	return this->heapArray->dArray + 2*index + 1;
+	return this->arrPtr->arrPtr + 2*index + 1;
 }
 
 int* Heap::getBiggestChild(int index)	// zwroc wskaznik na syna o najwiekszej wartosci
@@ -113,7 +113,7 @@ int Heap::findValue(int value)
 {
 	for (int counter = 0; counter < nodeCount; counter++)
 	{
-		if (*(this->heapArray->dArray + counter) == value)
+		if (*(this->arrPtr->arrPtr + counter) == value)
 			return counter;
 	}
 	return -1;
@@ -138,7 +138,7 @@ void Heap::display(std::string sp, std::string sn, int v)
 
 		s = s.substr(0, sp.length() - 2);
 
-		std::cout << s << sn << *(this->heapArray->dArray + v) << std::endl;
+		std::cout << s << sn << *(this->arrPtr->arrPtr + v) << std::endl;
 
 		s = sp;
 		if (sn == cl) s[s.length() - 2] = ' ';
@@ -149,9 +149,10 @@ void Heap::display(std::string sp, std::string sn, int v)
 Heap::Heap()
 {
 	this->nodeCount = 0;
-	this->heapArray = new DArray(nodeCount);
+	this->arrPtr = new arrPtr(nodeCount);
 }
 
 Heap::~Heap()
 {
 }
+*/

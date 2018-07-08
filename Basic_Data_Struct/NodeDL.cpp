@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "NodeDL.h"
+/*#include "NodeDL.h"
 #include <string>
 
 NodeDL::NodeDL(int value, NodeDL* prev, NodeDL * next)
@@ -21,4 +21,4 @@ int NodeDL::getvalue()
 NodeDL::~NodeDL()
 {
 
-}
+}*/

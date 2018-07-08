@@ -1,16 +1,16 @@
 /*#pragma once
-#include "NodeSL.h"
+#include "Node.h"
 
 class SingleLinkedList
 {
 private:
-	NodeSL * head;
+	Node * head;
 
 public:
 	SingleLinkedList();
 
-	void pushFront(int value, NodeSL *& head);
-	void pushBack(int value, NodeSL *& head);
+	void pushFront(int value, Node *& head);
+	void pushBack(int value, Node *& head);
 
 	void popFront();
 	void popBack();
@@ -21,10 +21,10 @@ public:
 	void display();
 	
 	// Getters
-	NodeSL* getHead();
+	Node* getHead();
 
 	// Setters
-	void setHead(NodeSL*& head);
+	void setHead(Node*& head);
 
 	~SingleLinkedList();
 };

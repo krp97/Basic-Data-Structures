@@ -147,28 +147,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DArray.h" />
+    <ClInclude Include="Array.h" />
+    <ClInclude Include="DataStructure.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Heap.h" />
-    <ClInclude Include="Node.h" />
     <ClInclude Include="NodeDL.h" />
-    <ClInclude Include="NodeSL.h" />
-    <ClInclude Include="R_BNode.h" />
-    <ClInclude Include="R_BTree.h" />
-    <ClInclude Include="SingleLinkedList.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Basic_Data_Struct.cpp" />
-    <ClCompile Include="DArray.cpp" />
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="NodeDL.cpp" />
-    <ClCompile Include="NodeSL.cpp" />
-    <ClCompile Include="R_BNode.cpp" />
-    <ClCompile Include="R_BTree.cpp" />
-    <ClCompile Include="SingleLinkedList.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

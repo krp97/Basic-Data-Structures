@@ -1,5 +1,5 @@
-#pragma once
-#include "DArray.h"
+/*#pragma once
+#include "Array.h"
 #include "NodeDL.h"
 #include <iostream>
 #include <string>
@@ -7,7 +7,7 @@ class Heap
 {
 private:
 
-	DArray * heapArray;
+	Array * heapArray;
 	int nodeCount;
 
 public:
@@ -34,4 +34,4 @@ public:
 	Heap();
 	~Heap();
 };
-
+*/

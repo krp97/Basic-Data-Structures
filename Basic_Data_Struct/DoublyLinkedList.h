@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "NodeDL.h"
 class DoublyLinkedList
 {
@@ -27,4 +27,4 @@ public:
 
 	~DoublyLinkedList();
 };
-
+*/

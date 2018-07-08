@@ -1,11 +1,16 @@
-#pragma once
-#include <iostream>
+/*#pragma once
+#include <string>
 class Node
 {
-	// Abstract class serving as a base class for all nodes.
 protected:
-	int value;
-public:
-	virtual std::string toString() = 0;
-};
 
+	int value;
+	Node * next;
+
+public:
+	Node();
+	Node(int value, Node* next);
+	virtual std::string toString();
+	~Node();
+};
+*/

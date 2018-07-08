@@ -1,9 +1,8 @@
-#pragma once
+/*#pragma once
 #include "Node.h"
-class NodeDL : private Node
+class NodeDL : public Node
 {
 	friend class DoublyLinkedList;
-	friend class Heap;
 
 private:
 	NodeDL * prev;	
@@ -16,5 +15,5 @@ public:
 	int getvalue();
 
 	~NodeDL();
-};
+};*/
 
