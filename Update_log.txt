@@ -11,3 +11,7 @@
 		  This provides an actual size of a block of memory allocated.
 		  The Array is no longer reallocated with each push and pop,
 		  but preallocated with a bigger size.(See code comments in Array for more).
+3) 9 July, 2018
+	- Partial implementation of a List iterator(todo: pointer validation)
+	- Redesigned the list methods to accomodate the iterator implementation
+	+ todo: destructor for the List class, iterator security

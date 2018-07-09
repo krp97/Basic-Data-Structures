@@ -1,31 +1,33 @@
-/*#pragma once
+#pragma once
 #include "Node.h"
-
-class SingleLinkedList
+#include <string>
+#include "ListIterator.h"
+class List
 {
+	using iterator = ListIterator;
 private:
 	Node * head;
+	int size;
+
+	List::iterator begin() const;
+	List::iterator end() const;
+	List::iterator iteratorAt(int index);
 
 public:
-	SingleLinkedList();
+	List();
 
-	void pushFront(int value, Node *& head);
-	void pushBack(int value, Node *& head);
+
+
+	void pushFront(int value);
+	void pushBack(int value);
+	void pushAt(int value, int index);
 
 	void popFront();
 	void popBack();
-
-	int getCount();
-	int find(); // index, address, value?
-
-	void display();
+	void popAt(int index);
 	
-	// Getters
-	Node* getHead();
+	virtual std::string toString();
 
-	// Setters
-	void setHead(Node*& head);
-
-	~SingleLinkedList();
+	~List();
 };
-*/
+

@@ -151,6 +151,7 @@
     <ClInclude Include="DataStructure.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Heap.h" />
+    <ClInclude Include="ListIterator.h" />
     <ClInclude Include="NodeDL.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="List.h" />

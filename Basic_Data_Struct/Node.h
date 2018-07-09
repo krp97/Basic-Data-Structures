@@ -1,7 +1,9 @@
-/*#pragma once
+#pragma once
 #include <string>
 class Node
 {
+	friend class ListIterator;
+	friend class List;
 protected:
 
 	int value;
@@ -13,4 +15,4 @@ public:
 	virtual std::string toString();
 	~Node();
 };
-*/
+

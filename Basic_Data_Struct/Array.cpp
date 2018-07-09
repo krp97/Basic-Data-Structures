@@ -4,6 +4,7 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+
 Array::Array()
 {
 	this->size = 0;			// Current amount of values in the array

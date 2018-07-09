@@ -1,5 +1,5 @@
 #include "stdafx.h"
-/*#include "Node.h"
+#include "Node.h"
 
 Node::Node()
 {}
@@ -18,4 +18,4 @@ std::string Node::toString()
 Node::~Node()
 {
 
-}*/
+}
