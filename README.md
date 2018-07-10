@@ -5,10 +5,10 @@
 This implementation is a a partial result of a course "Data Structures and Computational Complexity".
 This project's requirements were as following:
 1. Implement following data structures:
-  ..* Singly Linked List
-  ..* Doubly Linked List
-  ..* Array
-  ..* Heap 
+..* Singly Linked List
+..* Doubly Linked List
+..* Array
+..* Heap 
 2. All of the above are to be developed without the use of libraries such as: STL or Boost.
 The Red and Black Tree was also required, however it was decided to move it to a second part
 of this project - "Data Structures", and introduce the Stack instead.
@@ -20,8 +20,8 @@ This abstract class was meant to be a highest level of relation tree.
 It implements a pure virtual method : toString() and an attribute "size", 
 by which every structure should be characterized.
 Links used:
-  ..* [Abstract Classes](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.cbclx01/cplr142.htm)
-  ..* Pure Virtual Functions: [Wikipedia](https://en.wikipedia.org/wiki/Virtual_function) and [cppreference](https://en.cppreference.com/w/cpp/language/abstract_class)
+..* [Abstract Classes](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.cbclx01/cplr142.htm)
+..* Pure Virtual Functions: [Wikipedia](https://en.wikipedia.org/wiki/Virtual_function) and [cppreference](https://en.cppreference.com/w/cpp/language/abstract_class)
 
 ### Array
 Sizes of the Array are consecutive powers of 2,
