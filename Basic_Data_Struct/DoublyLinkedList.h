@@ -1,30 +1,43 @@
-/*#pragma once
+#pragma once
 #include "NodeDL.h"
+#include "DLListIterator.h"
+#include <string>
+
 class DoublyLinkedList
 {
-private:
+	using iterator = DLListIterator;
 
 	NodeDL * head;
 	NodeDL * tail;
+	int size;
+
+	DoublyLinkedList::iterator begin() const;
+	DoublyLinkedList::iterator end() const;
+	DoublyLinkedList::iterator rbegin() const;
+	DoublyLinkedList::iterator rend() const;
+
+	DoublyLinkedList::iterator iteratorAt(int index);
 
 public:
 
+	struct EmptyListException : public std::exception {
+		const char * description() const throw () {
+			return "Operation on an empty list."; 
+		}
+	};
+
 	DoublyLinkedList();
 
-	void pushFront(int value);				// Dodawanie na poczatku
-	void pushBack(int value);				// Dodawanie na koncu
-	void pushAt(int value, int index);		// Dodawanie przed indeksem 
+	
+	virtual void pushFront(int value);
+	virtual void pushBack(int value);
+	virtual void pushAt(int value, int index);
 
-	void popFront();			// Usuwanie poczatku
-	void popBack();				// Usuwanie konca
-	void popAt(int index);		// Usuwanie elementu przed indeksem
+	virtual void popFront();
+	virtual void popBack();
+	virtual void popAt(int index);	
 
-	int find(int value);		// Wyszukiwanie wartosci
-
-	void display();				// Wyswietlanie
-
-	int getCount();				// Zwrocenie ilosci wezlow
+	virtual std::string toString();
 
 	~DoublyLinkedList();
 };
-*/

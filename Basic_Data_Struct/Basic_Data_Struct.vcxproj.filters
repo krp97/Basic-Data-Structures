@@ -45,6 +45,9 @@
     <ClInclude Include="ListIterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DLListIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

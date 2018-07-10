@@ -28,11 +28,12 @@ void Array::pushFront(int value)
 		arrPtr = new int[size];
 	if (size > maxSize)
 	{
+		// Double up the size of the array for future accesses.
 		maxSize *= 2;
 		int *tempArray = new int[maxSize];
 		*tempArray = value;
 
-		if(size != 1)
+		if(size > 1) // Otherwise there's no need to copy data.
 			memcpy(tempArray + 1, arrPtr, (size - 1) * sizeof(int));
 		
 		if (arrPtr != nullptr)
@@ -53,6 +54,8 @@ void Array::pushBack(int value)
 {
 	size++;
 
+	// Logic quite similar as above, with a small difference:
+	// - Since the value is pushed at the back, there's no element shifting.
 	if (arrPtr == nullptr)
 		arrPtr = new int[size];
 	if (size > maxSize)
@@ -60,7 +63,7 @@ void Array::pushBack(int value)
 		maxSize *= 2;
 		int *temparrPtr = new int[maxSize];
 		
-		if(size != 1)
+		if(size > 1)
 			memcpy(temparrPtr, arrPtr, (size - 1) * sizeof(int));
 		
 		if (arrPtr != nullptr)
@@ -204,6 +207,18 @@ void Array::popAt(int index)
 				arrPtr[arrIt] = arrPtr[arrIt + 1];
 		}
 	}
+}
+
+void Array::swap(int first_index, int second_index)
+{
+	if (first_index < size && first_index >= 0 && second_index < size && second_index >= 0)
+	{
+		int tmp_value = arrPtr[first_index];
+		arrPtr[first_index] = arrPtr[second_index];
+		arrPtr[second_index] = tmp_value;
+	}
+	else
+		throw std::invalid_argument("Wrong input index.");
 }
 
 std::string Array::toString()

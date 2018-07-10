@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="DataStructure.h" />
+    <ClInclude Include="DLListIterator.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="ListIterator.h" />

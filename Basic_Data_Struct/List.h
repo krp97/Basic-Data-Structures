@@ -5,26 +5,31 @@
 class List
 {
 	using iterator = ListIterator;
-private:
+
 	Node * head;
 	int size;
 
-	List::iterator begin() const;
-	List::iterator end() const;
+	List::iterator begin() const { return ListIterator(this->head); };
+	List::iterator end() const { return ListIterator(nullptr); };
 	List::iterator iteratorAt(int index);
 
 public:
+
+	struct EmptyListException : public std::exception {
+		const char * description() const throw () {
+			return "Operation on an empty list.";
+		}
+	};
+
 	List();
 
+	virtual void pushFront(int value);
+	virtual void pushBack(int value);
+	virtual void pushAt(int value, int index);
 
-
-	void pushFront(int value);
-	void pushBack(int value);
-	void pushAt(int value, int index);
-
-	void popFront();
-	void popBack();
-	void popAt(int index);
+	virtual void popFront();
+	virtual void popBack();
+	virtual void popAt(int index);
 	
 	virtual std::string toString();
 

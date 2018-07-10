@@ -8,14 +8,7 @@ List::List()
 	head = nullptr;
 	size = 0;
 }
-List::iterator List::begin() const
-{
-	return ListIterator(this->head);
-}
-List::iterator List::end() const
-{
-	return ListIterator(nullptr);
-}
+
 ListIterator List::iteratorAt(int index)
 {
 	int counter = 0;
@@ -29,59 +22,55 @@ ListIterator List::iteratorAt(int index)
 	}
 	return ListIterator(nullptr);
 }
+
 void List::pushFront(int value)
 {
 	Node * p = new Node(value, head);
 	head = p;
 	size++;
-
 }
+
 void List::pushBack(int value)
 {
-	auto temp_it = begin();
+	// Find the last element of the list and attach a new one to the "next" address.
+	auto temp_it = iteratorAt(size - 1);
 
 	if (temp_it.node != nullptr)
-	{
-		for (auto list_iter = begin(); list_iter != end(); ++list_iter)
-		{
-			temp_it = list_iter;
-		}
-
-		Node * lastNode = new Node(value, NULL);
-		(*temp_it).next = lastNode;
-	}
+		(*temp_it).next = new Node(value, NULL);
 	else
-	{
 		head = new Node(value, NULL);
-	}
 	size++;
 }
+
 void List::pushAt(int value, int index)
 {
 	if (size == 0 && index == 0)
 		pushFront(value);
-	else if (size > 0)
+	else if (size > 0 && index > 0 && index <= size)
 	{
-		ListIterator list_iter = iteratorAt(index);
+		// Create a node that points to the current node at "index",
+		// and update the address of a field "next" that pointed to it.
+		ListIterator list_iter = iteratorAt(index - 1);
 
 		if (list_iter.node != nullptr)
 		{
-			list_iter.node->next = new Node(value, list_iter.node->next);
+			(*list_iter).next = new Node(value, (*list_iter).next);
 			size++;
 			return;
 		}
 		else
-			throw "custom iterator expression here";
+			throw std::invalid_argument("Incorrect input index.");
 	}
 	else
 	{
-		throw "custom expression here";
+		throw EmptyListException();
 	}
 }
+
 void List::popFront()
 {
 	if (size == 0)
-		throw "custom expression here boi";
+		throw EmptyListException();
 	else
 	{
 		Node * tmp = head->next;
@@ -90,49 +79,72 @@ void List::popFront()
 		size--;
 	}
 }
+
 void List::popBack()
 {
 	if (size == 0)
-		throw "custom expression here boi";
+		throw EmptyListException();
 	else
 	{
-		auto tmp_it = begin();
-		for (auto list_iter = begin(); list_iter != end(); ++list_iter)
+		// Two cases with different behaviour after deleting a node:
+		// 1) Delete node was a head -> update the head pointer.
+		// 2) In any other case -> update the "next" field of a previous node.
+
+		auto list_it = iteratorAt(size - 1);
+		delete list_it.node;
+
+		if (size == 1)
+			head = nullptr;
+		else
 		{
-			tmp_it = list_iter;
+			auto list_it = iteratorAt(size - 2);
+			(*list_it).next = nullptr;
 		}
-		delete tmp_it.node;
 		size--;
 	}
 }
+
 void List::popAt(int index)
 {
 	if (size == 0)
-		throw "custom expression here";
+		throw EmptyListException();
+	else if (index > size || index < 0)
+		throw std::invalid_argument("Incorrect input index.");
 	else
 	{
-		ListIterator list_iter = iteratorAt(index - 1);
-
-		if (list_iter.node != nullptr)
+		// Quite similar as above with the difference being that:
+		// 1) The left and right neighbours have to be connected before removal.
+		if (size == 1)
 		{
-			Node * tmp = list_iter.node->next->next;
-			delete list_iter.node->next;
-			list_iter.node->next = tmp;
-			size--;
+			delete head;
+			head = nullptr;
 		}
+		else
+		{
+			ListIterator list_iter = iteratorAt(index);
+			Node * tmp = (*list_iter).next->next;
+			delete (*list_iter).next;
+			(*list_iter).next = tmp;
+		}
+		size--;
 	}
 }
 
 std::string List::toString()
 {
+	std::string list_to_string;
 	for (auto list_iter = begin(); list_iter != end(); ++list_iter)
 	{
-		std::cout << list_iter.node->value << " -> ";
+		list_to_string += (*list_iter).toString + " -> ";
 	}
-	return std::string();
+	return list_to_string;
 }
 
 List::~List()
 {
-	// Delete all nodes if size > 0
+	if (head != nullptr)
+	{
+		for (int size_it = 0; size_it < size;)
+			popBack();
+	}
 }

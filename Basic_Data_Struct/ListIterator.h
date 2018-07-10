@@ -9,7 +9,7 @@
 class ListIterator
 {
 	friend class List;
-private:
+
 	Node* node;
 
 public:

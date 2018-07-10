@@ -4,15 +4,20 @@ class Node
 {
 	friend class ListIterator;
 	friend class List;
+
+	Node * next;
+
 protected:
 
 	int value;
-	Node * next;
 
 public:
+
 	Node();
 	Node(int value, Node* next);
-	virtual std::string toString();
+
+	virtual std::string toString() { return std::string(std::to_string(value)); };
+
 	~Node();
 };
 

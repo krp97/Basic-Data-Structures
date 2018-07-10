@@ -1,170 +1,188 @@
 #include "stdafx.h"
-/*#include "DoublyLinkedList.h"
+#include "DoublyLinkedList.h"
 #include <iostream>
 
+
+DoublyLinkedList::iterator DoublyLinkedList::begin() const
+{
+	return DoublyLinkedList::iterator(head);
+}
+
+DoublyLinkedList::iterator DoublyLinkedList::end() const
+{
+	return DoublyLinkedList::iterator(nullptr);
+}
+
+DoublyLinkedList::iterator DoublyLinkedList::rbegin() const
+{	
+	return DoublyLinkedList::iterator(tail);
+}
+
+DoublyLinkedList::iterator DoublyLinkedList::rend() const
+{
+	return DoublyLinkedList::iterator(nullptr);
+}
+
+DoublyLinkedList::iterator DoublyLinkedList::iteratorAt(int index)
+{
+	NodeDL * tmp = head;
+	for (int list_it = 0; tmp != nullptr; ++list_it)
+	{
+		if(list_it == index)
+			return DoublyLinkedList::iterator(tmp);
+		tmp = tmp->next;
+	}
+	return DoublyLinkedList::iterator(nullptr);
+}
 
 DoublyLinkedList::DoublyLinkedList()
 {
 	head = nullptr;
 	tail = nullptr;
+	size = 0;
 }
 
 void DoublyLinkedList::pushFront(int value)
 {
 	NodeDL* p = new NodeDL(value, nullptr, head);
-
-	if (getCount() == 0)	// pierwsze dodanie
-	{
-		head = p;
+	size++;
+	
+	if (head == nullptr)	
 		tail = p;
-		p->value = value;
-		return;
-	}
+	else
+		head->prev = p;
 
-	head->prev = p;			// ustawienie poprzednika w poprzedniej glowie
-	head = p;				// ustawienie nowej glowy listy
+	head = p;
 }
 
 void DoublyLinkedList::pushBack(int value)
 {
 	NodeDL* p = new NodeDL(value, tail, nullptr);
+	size++;
 
-	if (getCount() == 0)	// pierwsze dodanie
-	{
+	if (head == nullptr)	
 		head = p;		
-		tail = p;
-		p->value = value;
-		return;
-	}
+	else
+		tail->next = p;
 
-	tail->next = p;			// ustawienie nastepnika w poprzednim ogonie
-	tail = p;				// ustawienie nowego ogona
+	tail = p;
 }
 
-void DoublyLinkedList::pushAt(int value, int index)		// wstawienie przed podanym indeksem
+void DoublyLinkedList::pushAt(int value, int index)
 {
-	if (index == 0)					
-		pushFront(value);
-	else if (index == getCount())
-		pushBack(value);
-	else
+	if (size == 0)
+		throw EmptyListException();
+	else if(index > 0 && index <= size)
 	{
-		int counter = 0;
-		NodeDL* it = head;			// iterator listy
-
-		while (index > counter)	
+		// Reusing the existing methods for similar actions.
+		if (index == 0)
+			pushFront(value);
+		else if (index == size)
+			pushBack(value);
+		else
 		{
-			counter++;
-			it = it->next;
-		}
+			DLListIterator list_it = iteratorAt(index);
+			NodeDL* p = new NodeDL(value, (*list_it).prev, list_it.node);	
+			size++;
 
-		NodeDL* p = new NodeDL(value, it->prev, it);	// nowy element miedzy poprzednikiem iteratora, a iteratorem
-		it->prev->next = p;								// ustawienie "next" poprzednika na nowy element
-		it->prev = p;									// ustawienie "prev" iteratora na nowy element
+			(*list_it).prev->next = p;								
+			(*list_it).prev = p;
+		}
 	}
 }
 
 void DoublyLinkedList::popFront()
 {
-	if (getCount() > 0)
+	if (size == 0)
+		throw EmptyListException();
+	else
 	{
-		if (getCount() == 1)			// tylko jeden element w liscie
+		// When the list isn't empty, 
+		// the pointer of a neighbouring node has to be updated.
+
+		if (head == tail)
 		{
 			delete head;
 			head = nullptr;
 			tail = nullptr;
-
-			return;
 		}
-
-		head = head->next;				// przesuniecie dotychczasowej glowy na nastepny element					
-		delete head->prev;				// usuniecie poprzednika aktualnej glowy
-		head->prev = nullptr;			
+		else
+		{
+			head = head->next;									
+			delete head->prev;				
+			head->prev = nullptr;
+		}
+		size--;
 	}
 }
 
 void DoublyLinkedList::popBack()
 {
-	if (getCount() > 0)
+	if (size == 0)
+		throw EmptyListException();
+	else
 	{
-		if (getCount() == 1)			// tylko jeden element w liscie
+		// Similar as in the case of popFront().
+		if (head == tail)		
 		{
 			delete tail;
 			head = nullptr;
 			tail = nullptr;
-
-			return;
 		}
-
-		tail = tail->prev;				// przesuniecie dotychczasowego ogona na poprzedni element
-		delete tail->next;				// usuniecie nastepnika aktualnego ogona
-		tail->next = nullptr;
+		else
+		{
+			tail = tail->prev;				
+			delete tail->next;
+			tail->next = nullptr;
+		}
+		size--;
 	}
 }
 
-void DoublyLinkedList::popAt(int index)		// usuniecie przed podanym indeksem
+void DoublyLinkedList::popAt(int index)
 {
-	if (index == 0)						
-		popFront();
-	else if (index == getCount())
-		popBack();
+	if (size == 0)
+		throw EmptyListException();
+	else if (index >= 0 && index <= size)
+	{
+		// Resuing existing methods for similar actions.
+		if (index == 0)
+			popFront();
+		else if (index == size)
+			popBack();
+		else
+		{
+			// Updating the pointers of neighbouring nodes before removal,
+			// in order to prevent data loss and undefined references.
+
+			DLListIterator list_it = iteratorAt(index);
+
+			(*list_it).next->prev = (*list_it).prev;			
+			(*list_it).prev->next = (*list_it).next;			
+
+			delete list_it.node;
+		}
+	}
 	else
-	{
-		NodeDL* it = head;					// iterator listy
-		int counter = 0;
-
-		while (counter != index)			// ustawienie iteratora na zadany indeks
-		{
-			counter++;
-			it = it->next;
-		}
-
-		it->next->prev = it->prev;			// ustawienie pola "prev" nastepnika na poprzednik iteratora
-		it->prev->next = it->next;			// ustawienie pola "next" poprzednika na nastepnik iteratora
-		delete it;
-	}
+		throw "Invalid input index.";
 }
 
-int DoublyLinkedList::find(int value)
+std::string DoublyLinkedList::toString()
 {
-	NodeDL* p = head;
-	int index = 0;
+	std::string list_to_string;
 
-	while (p != nullptr)					// wyluskanie pierwszego adresu pod ktorym znajduje sie value
+	for (auto list_it = begin(); list_it != end(); ++list_it)
 	{
-		if (value == p->value)
-		{
-			return index;
-		}
-		p = p->next;
+		list_to_string += (*list_it).toString();
+		if ((*list_it).next == nullptr)
+			continue;
+		list_to_string += "<->";
 	}
-	return 0; 
-}
-
-void DoublyLinkedList::display()
-{
-	NodeDL* p = head;
-
-	while (p != nullptr)
-	{
-		std::cout << (p->value) << "<->";
-		p = p->next;
-	}
-}
-int DoublyLinkedList::getCount()
-{
-	int count = 0;
-	NodeDL* p = head;
-
-	while (p != nullptr)
-	{
-		count++;
-		p = p->next;
-	}
-	return count;
+	return list_to_string;
 }
 
 DoublyLinkedList::~DoublyLinkedList()
 {
+	for (int size_it = 0; size_it < size;)
+		popBack();
 }
-*/

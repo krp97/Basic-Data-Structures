@@ -15,3 +15,10 @@
 	- Partial implementation of a List iterator(todo: pointer validation)
 	- Redesigned the list methods to accomodate the iterator implementation
 	+ todo: destructor for the List class, iterator security
+
+4) 10 July, 2018
+
+	- Finalized iterator implementation for the List
+	- Fixed memory leaks in Array and List classes
+	- Implemented Doubly Linked List and an iterator for it
+	- Misc (comments)

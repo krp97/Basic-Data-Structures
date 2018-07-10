@@ -4,9 +4,12 @@
 class Array : public DataStructure
 {
 	friend class Heap;
-private:
+
+protected:
+
 	int* arrPtr;
 	int maxSize;
+
 public:
 
 	struct EmptyArrException : public std::exception {
@@ -23,10 +26,7 @@ public:
 
 	int operator[](int index)
 	{
-		if (index > 0 || index < this->size)
-			return *(this->arrPtr + index);
-		else
-			throw std::invalid_argument("Invalid index.");
+		return *(this->arrPtr + index);
 	};
 
 	void pushFront(int value);			
@@ -35,7 +35,9 @@ public:
 
 	void popFront();					
 	void popBack();						
-	void popAt(int index);				
+	void popAt(int index);
+
+	void swap(int first_index, int second_index);
 
 	std::string toString();						
 		
