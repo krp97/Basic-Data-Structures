@@ -78,7 +78,6 @@ void Array::pushBack(int value)
 
 void Array::pushAt(int value, int index)
 {
-	// In the case when index == 0, use pushFront().
 	if (arrPtr == nullptr && index != 0)
 		throw EmptyArrException();
 	if (index <= size && index >= 0)					
@@ -167,9 +166,9 @@ void Array::popBack()
 			delete[] arrPtr;
 			arrPtr = temparrPtr;
 		}
-		else
+		else if (size == 0)
 		{
-			delete arrPtr;
+			delete[] arrPtr;
 			arrPtr = nullptr;
 		}
 	}
@@ -211,7 +210,7 @@ void Array::popAt(int index)
 
 void Array::swap(int first_index, int second_index)
 {
-	if (first_index < size && first_index >= 0 && second_index < size && second_index >= 0)
+	if (first_index <= size && first_index >= 0 && second_index <= size && second_index >= 0)
 	{
 		int tmp_value = arrPtr[first_index];
 		arrPtr[first_index] = arrPtr[second_index];
@@ -226,30 +225,21 @@ std::string Array::toString()
 	std::string output = "|"; // First character
 
 	if (size > 0)
-		for (int arrIt = 0; arrIt < size; arrIt++)
+		for (int arrIt = 0; arrIt < size; ++arrIt)
 			output += std::to_string(arrPtr[arrIt]) + '|';
-	
 	else
-		throw EmptyArrException();
+		return std::string();
+
 	return output;
 }
 
 int Array::lookUpValue(int value)
 {
-	bool foundFlag = false;
-	if (size == 0)
-		throw EmptyArrException();
-	else
-	{
-		for (int arrIt = 0; arrIt < size; ++arrIt)
-			if (arrPtr[arrIt] == value)
-			{
-				return arrIt;
-				foundFlag = true;
-			}
-	}
-	if (!foundFlag)
-		throw NotFoundException();
+	for (int arrIt = 0; arrIt < size; ++arrIt)
+		if (arrPtr[arrIt] == value)
+			return arrIt;
+
+	return -1;
 }
 
 void Array::loadFromFile(std::string fileName)

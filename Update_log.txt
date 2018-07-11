@@ -1,8 +1,11 @@
 1) 7 July, 2018
+
 	- Cleanup of Dynamic Array class 
 	- Added Node abstract class to correct the logic structure
 	- Added file handling functions
+
 2) 8 July, 2018
+
 	- Redesigned logic structure and relations between classes
 	- Refactoring:
 		+ Changed names of files to better represent current logic structure
@@ -12,6 +15,7 @@
 		  The Array is no longer reallocated with each push and pop,
 		  but preallocated with a bigger size.(See code comments in Array for more).
 3) 9 July, 2018
+
 	- Partial implementation of a List iterator(todo: pointer validation)
 	- Redesigned the list methods to accomodate the iterator implementation
 	+ todo: destructor for the List class, iterator security
@@ -22,3 +26,12 @@
 	- Fixed memory leaks in Array and List classes
 	- Implemented Doubly Linked List and an iterator for it
 	- Misc (comments)
+
+5) 11 July, 2018
+
+	- Following elements were introduced:
+		* Heap
+		* Stack (Both are still to be extensively tested)
+		* Class wrapper for the timing functions
+		* Partial implementation of a menu for user interaction
+ 

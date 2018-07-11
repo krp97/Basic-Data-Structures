@@ -5,6 +5,17 @@ class Array : public DataStructure
 {
 	friend class Heap;
 
+	void pushAt(int value, int index);		// These methods shouldn't be available for the Heap.
+	void popAt(int index);
+	
+	bool operator==(const Array& arr)
+	{
+		for (int arr_it = 0; arr_it < size; ++arr_it)
+			if (arrPtr[arr_it] != *(arr.arrPtr + arr_it))
+				return false;
+		return true;
+	}
+
 protected:
 
 	int* arrPtr;
@@ -31,12 +42,10 @@ public:
 
 	void pushFront(int value);			
 	void pushBack(int value);			
-	void pushAt(int value, int index);	
-
+		
 	void popFront();					
 	void popBack();						
-	void popAt(int index);
-
+	
 	void swap(int first_index, int second_index);
 
 	std::string toString();						
@@ -47,7 +56,7 @@ public:
 	void saveToFile(std::string fileName);
 
 	Array();
-	Array(int statArr [], int size);
+	explicit Array(int statArr [], int size);
 
 	~Array();
 };

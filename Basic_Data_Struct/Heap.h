@@ -3,8 +3,12 @@
 #include "NodeDL.h"
 #include <iostream>
 #include <string>
-class Heap: public Array
+class Heap: private Array
 {
+	int getLeftChild(int index) { return 2 * index + 1; };
+	int getRightChild(int index) { return 2 * index + 2; };
+	int getParent(int index) { return (int)floor((index - 1) / 2); }
+	
 public:
 
 	void insert(int value);
@@ -16,13 +20,11 @@ public:
 	void fixUp(int index);					
 	void fixDown(int index);
 
-	int getLeftChild(int index) { return arrPtr[2 * index + 1]; };
-	int getRightChild(int index) { return arrPtr[2 * index + 2]; };
-	int getParent(int index) { return arrPtr[floor(index / 2)]; }
-
 	virtual std::string toString();
 
 	Heap();
+	explicit Heap(Array arr);
+
 	~Heap();
 };
 

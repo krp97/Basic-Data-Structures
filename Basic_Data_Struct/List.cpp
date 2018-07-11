@@ -1,8 +1,8 @@
 #include "stdafx.h"
-
 #include "List.h"
 #include <iterator>
 #include "ListIterator.h"
+
 List::List()
 {
 	head = nullptr;
@@ -49,7 +49,7 @@ void List::pushAt(int value, int index)
 	else if (size > 0 && index > 0 && index <= size)
 	{
 		// Create a node that points to the current node at "index",
-		// and update the address of a field "next" that pointed to it.
+		// and update the address of a field "next" in a Node that pointed to "index".
 		ListIterator list_iter = iteratorAt(index - 1);
 
 		if (list_iter.node != nullptr)
@@ -135,7 +135,7 @@ std::string List::toString()
 	std::string list_to_string;
 	for (auto list_iter = begin(); list_iter != end(); ++list_iter)
 	{
-		list_to_string += (*list_iter).toString + " -> ";
+		list_to_string += (*list_iter).toString() + " -> ";
 	}
 	return list_to_string;
 }
