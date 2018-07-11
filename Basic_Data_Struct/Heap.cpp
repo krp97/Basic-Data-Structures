@@ -28,7 +28,24 @@ void Heap::popRoot()
 
 void Heap::fixDown(int index)
 {
+	int leftChild = getLeftChild(index);
+	int rightChild = getRightChild(index);
 
+	int toSwap = index;
+
+	if (leftChild >= size - 1)
+	{
+		return; //nullptr
+	}
+	if (arrPtr[toSwap] < arrPtr[leftChild])
+		toSwap = leftChild;
+	if ((arrPtr[toSwap] < arrPtr[rightChild]) && (rightChild < size))
+		toSwap = rightChild;
+	if (toSwap != index)
+	{
+		swap(index, toSwap);
+		fixDown(toSwap);
+	}
 }
 
 void Heap::fixUp(int index)

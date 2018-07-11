@@ -18,7 +18,8 @@ public:
 
 	int getLeftChild(int index) { return arrPtr[2 * index + 1]; };
 	int getRightChild(int index) { return arrPtr[2 * index + 2]; };
-			
+	int getParent(int index) { return arrPtr[floor(index / 2)]; }
+
 	virtual std::string toString();
 
 	Heap();
