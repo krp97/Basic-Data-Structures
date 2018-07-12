@@ -7,7 +7,7 @@
 * Visual Memory Leak Detector - [available here](https://archive.codeplex.com/?p=vld).
 The "vld.h" is already included in the project for future debugging.
 
-## Project description.
+## Project description
 This implementation is a a partial result of a course "Data Structures and Computational Complexity".
 This project's requirements were as following:
 1. Implement following data structures:
@@ -19,9 +19,9 @@ This project's requirements were as following:
 The Red and Black Tree was also required, however it was decided to move it to a second part
 of this project - "Data Structures", and introduce the Stack instead.
 
-## Structures overview.
+## Structures overview
 
-### Data Structure.
+### Data Structure
 This abstract class was meant to be a highest level of relation tree.
 It implements a pure virtual method : toString() and an attribute "size", 
 by which every structure should be characterized.
@@ -58,7 +58,7 @@ The extension being sorting methods and interfacing with the structure.
 ### Stack
 Implemented as a class wrapper for an Array. It doesn't introduce any new functionalities on top of what is already introduced in an **Array** class. It's main functionality is to clearly present operations available for a stack structure based on an array.
 
-## Updates.
+## Updates
 Each commit is stamped with a date which can be looked up in the *UpdateLog* file,
 for information about specific changes.
 
