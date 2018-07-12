@@ -5,8 +5,6 @@ class Array : public DataStructure
 {
 	friend class Heap;
 
-
-	
 	bool operator==(const Array& arr)
 	{
 		for (int arr_it = 0; arr_it < size; ++arr_it)
@@ -49,7 +47,7 @@ public:
 
 	void swap(int first_index, int second_index);
 
-	std::string toString();						
+	virtual std::string toString();						
 		
 	int lookUpValue(int value);			
 

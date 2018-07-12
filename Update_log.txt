@@ -35,3 +35,8 @@
 		* Class wrapper for the timing functions
 		* Partial implementation of a menu for user interaction
  
+6) 12 July, 2018
+
+	- Implemented Handlers for the menu. Each submenu has each own handler,
+	  which contain a set of switch cases depending on the corresponding class components.
+	- Reorganized files within the directory.

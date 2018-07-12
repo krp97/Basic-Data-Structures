@@ -9,6 +9,9 @@ class Heap: private Array
 	int getRightChild(int index) { return 2 * index + 2; };
 	int getParent(int index) { return (int)floor((index - 1) / 2); }
 	
+	void fixUp(int index);
+	void fixDown(int index);
+	
 public:
 
 	void insert(int value);
@@ -16,9 +19,6 @@ public:
 
 	int peekRoot() { return arrPtr[0]; };
 	void popRoot();							
-
-	void fixUp(int index);					
-	void fixDown(int index);
 
 	virtual std::string toString();
 

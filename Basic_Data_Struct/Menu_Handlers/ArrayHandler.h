@@ -6,7 +6,9 @@ class ArrayHandler : private Handler
 {
 	Array * myArray;
 public:
+
 	virtual void initConsole();
+
 	ArrayHandler();
 	~ArrayHandler();
 };

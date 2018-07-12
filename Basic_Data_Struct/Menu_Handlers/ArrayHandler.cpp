@@ -4,137 +4,99 @@
 
 void ArrayHandler::initConsole()
 {
-	system("CLS");
-	int arraySize = 8;
-	std::string namesArr[8] = { "Push Back", "Push Front" , "Push At" , "Pop Back", "Pop Front", "Pop At", "Find value", "Display" };
-	drawMenu(namesArr, arraySize, "Array");
-
-	int initPosition = 1;
-	gotoXY(6, 1);
-	std::cout << ">>";
-
-	bool runFlag = true;
-	bool longPress = false;
-
-	while (runFlag)
+	int arraySize = 9;
+	std::string namesArr[9] = { "Push Back", "Push Front" , "Push At" , "Pop Back", "Pop Front", "Pop At", "Find value", "Display", "Return" };
+	
+	while (true)
 	{
-		if (!longPress)
+		system("CLS");
+		drawMenu(namesArr, arraySize, "Array");
+
+		int choice = 0;
+		std::cout << std::endl << " Your choice >> ";
+		std::cin >> choice;
+
+		switch (choice)
 		{
-			if (GetAsyncKeyState(VK_DOWN))
-			{
-				if (!longPress && initPosition < arraySize)
-				{
-					gotoXY(6, initPosition);
-					std::cout << "  ";
-					initPosition++;
-					gotoXY(6, initPosition);
-					std::cout << ">>";
-					longPress = true;
-				}
-			}
-			if (GetAsyncKeyState(VK_UP))
-			{
-				if (!longPress && initPosition > 1)
-				{
-					gotoXY(6, initPosition);
-					std::cout << "  ";
-					initPosition--;
-					gotoXY(6, initPosition);
-					std::cout << ">>";
-					longPress = true;
-				}
-			}
-			if (GetAsyncKeyState(VK_RETURN))
-			{
-				switch (initPosition)
-				{
-				case 1:	// Push Back
-				{
-					int value;
-					gotoXY(5, arraySize + 3);
-					std::cout << "Input value to push >> ";
-					std::cin >> value;
-					myArray->pushBack(value);
-					break;
-				}
-				case 2:	// Push Front
-				{
-					int value;
-					gotoXY(5, arraySize + 3);
-					std::cout << "Input value to push >> ";
-					std::cin >> value;
-					myArray->pushFront(value);
-					break;
-				}
-				case 3: // Push At
-				{
-					int value, index;
-					gotoXY(5, arraySize + 3);
-					std::cout << "Input value to push >> ";
-					std::cin >> value;
-					gotoXY(5, arraySize + 4);
-					std::cout << "Input index to push at >>";
-					std::cin >> index;
-
-					try
-					{
-						myArray->pushAt(value, index);
-					}
-					catch (...)
-					{
-						gotoXY(5, arraySize + 5);
-						std::cout << "Invalid input index.";
-						getchar();
-					}
-
-					break;
-				}
-				case 4: // Pop Back
-				{
-					gotoXY(5, arraySize + 3);
-
-					try { myArray->popBack(); }
-					catch (...) { std::cout << "The array is empty."; getchar(); }
-					break;
-				}
-				case 5: // Pop Front
-				{
-					gotoXY(5, arraySize + 3);
-
-					try { myArray->popFront(); }
-					catch (...) { std::cout << "The array is empty."; getchar(); }
-					break;
-				}
-				case 6:
-				{
-					int index;
-					gotoXY(5, arraySize + 3);
-					std::cout << "Input index to pop from >> ";
-					std::cin >> index;
-					gotoXY(5, arraySize + 4);
-
-					try { myArray->popAt(index); }
-					catch (...) { "Invalid input index."; getchar(); }
-
-					break;
-				}
-				case 7: {return; }
-				}
-			}
+		case 1:	// Push Back
+		{
+			int value;
+			std::cout << "\n Input value to push >> ";
+			std::cin >> value;
+			myArray->pushBack(value);
+			break;
 		}
-		Sleep(50);
+		case 2:	// Push Front
+		{
+			int value;
+			std::cout << "\n Input value to push >> ";
+			std::cin >> value;
+			myArray->pushFront(value);
+			break;
+		}
+		case 3: // Push At
+		{
+			int value, index;
+			std::cout << "\n Input value to push >> ";
+			std::cin >> value;
+			std::cout << "\n Input index to push at >>";
+			std::cin >> index;
 
-		if (!GetAsyncKeyState(VK_UP) && !GetAsyncKeyState(VK_DOWN) && !GetAsyncKeyState(VK_RETURN))
-			longPress = false;
+			try
+			{
+				myArray->pushAt(value, index);
+			}
+			catch (...)
+			{
+				gotoXY(5, arraySize + 5);
+				std::cout << "\n Invalid input index.";
+				getchar();
+			}
+			break;
+		}
+		case 4: // Pop Back
+		{
+			try { myArray->popBack(); }
+			catch (...) { std::cout << "\n The array is empty."; getchar(); }
+			break;
+		}
+		case 5: // Pop Front
+		{
+			gotoXY(5, arraySize + 3);
+
+			try { myArray->popFront(); }
+			catch (...) { std::cout << "\n The array is empty."; getchar(); }
+			break;
+		}
+		case 6:
+		{
+			int index;
+			std::cout << "\n Input index to pop from >> ";
+			std::cin >> index;
+
+			try { myArray->popAt(index); }
+			catch (...) { "\n Invalid input index."; getchar(); }
+
+			break;
+		}
+		case 8:
+		{
+			std::cout << "\n Your array >> \n " << myArray->toString() << std::endl;
+			system("pause");
+			break;
+		}
+		case 9: {return; }
+		}
 	}
 }
 
-ArrayHandler::ArrayHandler() : Handler(consoleLine)
+ArrayHandler::ArrayHandler()
 {
 	this->myArray = new Array();
+	initConsole();
 }
-
 
 ArrayHandler::~ArrayHandler()
 {
+	delete myArray;
 }

@@ -60,6 +60,18 @@
     <ClInclude Include="Data_Structures\Array_base\Stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Menu_Handlers\ListHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Handlers\HeapHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Handlers\StackHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Handlers\DLListHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -96,6 +108,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Data_Structures\Array_base\Stack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Handlers\HeapHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Handlers\StackHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Handlers\DLListHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Handlers\ListHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

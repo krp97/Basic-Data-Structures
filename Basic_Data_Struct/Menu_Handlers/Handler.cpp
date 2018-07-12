@@ -2,84 +2,59 @@
 #include "Handler.h"
 #include <windows.h>
 #include <iostream>
+
 #include "ArrayHandler.h"
+#include "StackHandler.h"
+#include "HeapHandler.h"
 
 void Handler::initConsole()
 {
 	int arraySize = 6;
 	std::string test[6] = { "Array", "Heap", "Stack", "List", "Doubly Linked List", "Exit" };
-	drawMenu(test, arraySize, "Structures");
-
-	int initPosition = 1;
-	gotoXY(6, 1);
-	std::cout << ">>";
-
-	bool runFlag = true;
-	bool longPress = false;
-
-	while (runFlag)
+	
+	while (true)
 	{
-		if (GetAsyncKeyState(VK_DOWN))
-		{
-			if (!longPress && initPosition < arraySize)
-			{
-				gotoXY(6, initPosition);
-				std::cout << "  ";
-				initPosition++;
-				gotoXY(6, initPosition);
-				std::cout << ">>";
-				longPress = true;
-			}
-		}
-		if (GetAsyncKeyState(VK_UP))
-		{
-			if (!longPress && initPosition > 1)
-			{
-				gotoXY(6, initPosition);
-				std::cout << "  ";
-				initPosition--;
-				gotoXY(6, initPosition);
-				std::cout << ">>";
-				longPress = true;
-			}
-		}
-		if (GetAsyncKeyState(VK_RETURN))
-		{
-			switch (initPosition)
-			{
-			case 1:
-			{
-				ArrayHandler();
-				break;
-			}
-			case 2:
-			{
-				//heapMenu();
-				break;
-			}
-			case 3:
-			{
-				//stackMenu();
-				break;
-			}
-			case 4:
-			{
-				//listMenu();
-				break;
-			}
-			case 5:
-			{
-				//dllistMenu();
-				break;
-			}
-			}
-		}
-		Sleep(50);
+		system("CLS");
+		drawMenu(test, arraySize, "Structures");
+		std::cout << std::endl;
+		
+		std::cout << "Your choice >> ";
+		int choice;
+		std::cin >> choice;
 
-		if (!GetAsyncKeyState(VK_UP) && !GetAsyncKeyState(VK_DOWN))
-			longPress = false;
+		switch (choice)
+		{
+		case 1:
+		{
+			ArrayHandler();
+			break;
+		}
+		case 2:
+		{
+			HeapHandler();
+			break;
+		}
+		case 3:
+		{
+			StackHandler();
+			break;
+		}
+		case 4:
+		{
+			//listMenu();
+			break;
+		}
+		case 5:
+		{
+			//dllistMenu();
+			break;
+		}
+		case 6:
+		{
+			return;
+		}
+		}
 	}
-	return;
 }
 
 void Handler::gotoXY(int x, int y)
@@ -107,27 +82,22 @@ void Handler::drawMenu(std::string namesArr[], int size, std::string title)
 	int rightTitleSpace = spacesInside - leftTitleSpace - title.length();
 
 	// ----------------------- Printing ---------------------------------
-	gotoXY(5, 0);
 	std::cout << std::string(leftTitleSpace, '-') << title << std::string(rightTitleSpace, '-');
-
+	std::cout << std::endl;
 	// Each line has a form of : "|  1) title |".
 	// All lines are adjusted towards the longest subtitles.
 
 	for (int drawIt = 1; drawIt <= size; ++drawIt)
 	{
-		gotoXY(5, drawIt);
 		int spaces = longestName - namesArr[drawIt - 1].length();
 		std::cout << "|  " << drawIt << ") " << namesArr[drawIt - 1] << std::string(spaces, ' ') << " |\n";
 	}
-
-	gotoXY(5, size + 1);
 	std::cout << std::string(spacesInside, '-') << std::endl;
 }
 
-Handler::Handler(HANDLE console)
+Handler::Handler()
 {
-	this->consoleLine = console;
-	initConsole();
+
 }
 
 

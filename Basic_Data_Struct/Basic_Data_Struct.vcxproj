@@ -152,6 +152,7 @@
     <ClInclude Include="Data_Structures\DataStructure.h" />
     <ClInclude Include="Data_Structures\List_base\DLListIterator.h" />
     <ClInclude Include="Data_Structures\List_base\DoublyLinkedList.h" />
+    <ClInclude Include="Menu_Handlers\DLListHandler.h" />
     <ClInclude Include="Menu_Handlers\Handler.h" />
     <ClInclude Include="Data_Structures\Array_base\Heap.h" />
     <ClInclude Include="Data_Structures\List_base\ListIterator.h" />
@@ -159,6 +160,9 @@
     <ClInclude Include="Data_Structures\List_base\Node.h" />
     <ClInclude Include="Data_Structures\List_base\List.h" />
     <ClInclude Include="Data_Structures\Array_base\Stack.h" />
+    <ClInclude Include="Menu_Handlers\HeapHandler.h" />
+    <ClInclude Include="Menu_Handlers\ListHandler.h" />
+    <ClInclude Include="Menu_Handlers\StackHandler.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
@@ -168,12 +172,16 @@
     <ClCompile Include="Basic_Data_Struct.cpp" />
     <ClCompile Include="Data_Structures\Array_base\Array.cpp" />
     <ClCompile Include="Data_Structures\List_base\DoublyLinkedList.cpp" />
+    <ClCompile Include="Menu_Handlers\DLListHandler.cpp" />
     <ClCompile Include="Menu_Handlers\Handler.cpp" />
     <ClCompile Include="Data_Structures\Array_base\Heap.cpp" />
     <ClCompile Include="Data_Structures\List_base\NodeDL.cpp" />
     <ClCompile Include="Data_Structures\List_base\Node.cpp" />
     <ClCompile Include="Data_Structures\List_base\List.cpp" />
     <ClCompile Include="Data_Structures\Array_base\Stack.cpp" />
+    <ClCompile Include="Menu_Handlers\HeapHandler.cpp" />
+    <ClCompile Include="Menu_Handlers\ListHandler.cpp" />
+    <ClCompile Include="Menu_Handlers\StackHandler.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
