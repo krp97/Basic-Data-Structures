@@ -1,12 +1,11 @@
 #pragma once
 #include <string>
-#include "DataStructure.h"
+#include "..\DataStructure.h"
 class Array : public DataStructure
 {
 	friend class Heap;
 
-	void pushAt(int value, int index);		// These methods shouldn't be available for the Heap.
-	void popAt(int index);
+
 	
 	bool operator==(const Array& arr)
 	{
@@ -42,10 +41,12 @@ public:
 
 	void pushFront(int value);			
 	void pushBack(int value);			
-		
+	void pushAt(int value, int index);
+	
 	void popFront();					
 	void popBack();						
-	
+	void popAt(int index);
+
 	void swap(int first_index, int second_index);
 
 	std::string toString();						

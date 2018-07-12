@@ -147,34 +147,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
-    <ClInclude Include="DataStructure.h" />
-    <ClInclude Include="DLListIterator.h" />
-    <ClInclude Include="DoublyLinkedList.h" />
-    <ClInclude Include="Heap.h" />
-    <ClInclude Include="ListIterator.h" />
-    <ClInclude Include="NodeDL.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Stack.h" />
+    <ClInclude Include="Data_Structures\Array_base\Array.h" />
+    <ClInclude Include="Menu_Handlers\ArrayHandler.h" />
+    <ClInclude Include="Data_Structures\DataStructure.h" />
+    <ClInclude Include="Data_Structures\List_base\DLListIterator.h" />
+    <ClInclude Include="Data_Structures\List_base\DoublyLinkedList.h" />
+    <ClInclude Include="Menu_Handlers\Handler.h" />
+    <ClInclude Include="Data_Structures\Array_base\Heap.h" />
+    <ClInclude Include="Data_Structures\List_base\ListIterator.h" />
+    <ClInclude Include="Data_Structures\List_base\NodeDL.h" />
+    <ClInclude Include="Data_Structures\List_base\Node.h" />
+    <ClInclude Include="Data_Structures\List_base\List.h" />
+    <ClInclude Include="Data_Structures\Array_base\Stack.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Menu_Handlers\ArrayHandler.cpp" />
     <ClCompile Include="Basic_Data_Struct.cpp" />
-    <ClCompile Include="Array.cpp" />
-    <ClCompile Include="DoublyLinkedList.cpp" />
-    <ClCompile Include="Heap.cpp" />
-    <ClCompile Include="NodeDL.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="List.cpp" />
-    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="Data_Structures\Array_base\Array.cpp" />
+    <ClCompile Include="Data_Structures\List_base\DoublyLinkedList.cpp" />
+    <ClCompile Include="Menu_Handlers\Handler.cpp" />
+    <ClCompile Include="Data_Structures\Array_base\Heap.cpp" />
+    <ClCompile Include="Data_Structures\List_base\NodeDL.cpp" />
+    <ClCompile Include="Data_Structures\List_base\Node.cpp" />
+    <ClCompile Include="Data_Structures\List_base\List.cpp" />
+    <ClCompile Include="Data_Structures\Array_base\Stack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>

@@ -1,8 +1,8 @@
 #pragma once
 #include "Array.h"
-#include "NodeDL.h"
 #include <iostream>
 #include <string>
+
 class Heap: private Array
 {
 	int getLeftChild(int index) { return 2 * index + 1; };
