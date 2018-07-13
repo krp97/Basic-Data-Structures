@@ -63,6 +63,6 @@ Each commit is stamped with a date which can be looked up in the *UpdateLog* fil
 for information about specific changes.
 
 ## Miscellaneous
-Visual Studio's IntelliSense highlights the precompiled header "stdafx.h" with an error, however the project compiles without related warnings or errors. The problem started occuring during files reorganization. 
+Visual Studio's IntelliSense highlights the precompiled header "stdafx.h" with an error, however the project compiles without related warnings or errors. The problem started occuring during files reorganization and was later fixed with [this solution](https://stackoverflow.com/a/37709456).
 
 
