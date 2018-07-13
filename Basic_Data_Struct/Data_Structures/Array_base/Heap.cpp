@@ -9,22 +9,36 @@ void Heap::insert(int value)
 	pushBack(value);	
 
 	if (size > 1)
-		fixUp(size - 1);
+	{
+		try { fixUp(size - 1); } 
+		catch (std::invalid_argument) { throw; }
+	}
+		
 }
 
 void Heap::remove(int value)
 {
 	int index = lookUpValue(value);
-	swap(index, size - 1);
-	fixDown(index);
+
+	try 
+	{ 
+		swap(index, size - 1);
+		fixDown(index);
+	}
+	catch (std::invalid_argument) { throw; }
 }
 
 void Heap::popRoot()
  {
 	// Delete the root and put the lowest key in it's place
-	swap(0, size - 1);
-	popBack(); 
-	fixDown(0);
+	if (size > 0)
+	{
+		swap(0, size - 1);
+		popBack();
+		fixDown(0);
+	}
+	else
+		throw std::out_of_range("Empty array opertaion.");
 }
 
 void Heap::fixDown(int index)
@@ -45,8 +59,11 @@ void Heap::fixDown(int index)
 
 	if (toSwap != index)
 	{
-		swap(index, toSwap);
-		fixDown(toSwap);
+		try {
+			swap(index, toSwap);
+			fixDown(toSwap);
+		}
+		catch (std::invalid_argument) { throw; }
 	}
 }
 
@@ -68,8 +85,11 @@ void Heap::fixUp(int index)
 	
 	if (toSwap < size)
 	{
-		swap(parent, toSwap);
-		fixUp(parent);
+		try {
+			swap(parent, toSwap);
+			fixUp(parent);
+		}
+		catch (std::invalid_argument) { throw; }
 	}
 }
 
@@ -80,20 +100,14 @@ std::string Heap::toString()
 	if (size > 0)
 		for (int arrIt = 0; arrIt < size; arrIt++)
 			output += std::to_string(arrPtr[arrIt]) + '|';
-
 	else
-		throw EmptyArrException();
+		return std::string();
 	return output;
 }
 
 Heap::Heap()
 {
-}
 
-Heap::Heap(Array arr)
-{
-	this->arrPtr = arr.arrPtr;
-	fixDown(0);
 }
 
 Heap::~Heap()

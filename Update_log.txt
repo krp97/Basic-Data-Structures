@@ -40,3 +40,9 @@
 	- Implemented Handlers for the menu. Each submenu has each own handler,
 	  which contain a set of switch cases depending on the corresponding class components.
 	- Reorganized files within the directory.
+
+7) 13 July, 2018
+
+	- Started to implement user input correction for the menus
+	- Fixed bugs in the Array structure
+	- Minor logic changes (Handler class access modifiers)

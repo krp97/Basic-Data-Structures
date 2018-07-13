@@ -20,18 +20,6 @@ protected:
 
 public:
 
-	struct EmptyArrException : public std::exception {
-		const char * description() const throw () {
-			return "Empty array exception.";
-		}
-	};
-
-	struct NotFoundException : public std::exception {
-		const char * description() const throw () {
-			return "Value not found.";
-		}
-	};
-
 	int operator[](int index)
 	{
 		return *(this->arrPtr + index);

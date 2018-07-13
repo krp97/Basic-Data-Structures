@@ -6,6 +6,10 @@
 #include "ArrayHandler.h"
 #include "StackHandler.h"
 #include "HeapHandler.h"
+#include "ListHandler.h"
+#include "DLListHandler.h"
+
+#undef max // Clearing std::cin of wrong user input.
 
 void Handler::initConsole()
 {
@@ -41,12 +45,12 @@ void Handler::initConsole()
 		}
 		case 4:
 		{
-			//listMenu();
+			ListHandler();
 			break;
 		}
 		case 5:
 		{
-			//dllistMenu();
+			DLListHandler();
 			break;
 		}
 		case 6:
@@ -89,17 +93,23 @@ void Handler::drawMenu(std::string namesArr[], int size, std::string title)
 
 	for (int drawIt = 1; drawIt <= size; ++drawIt)
 	{
-		int spaces = longestName - namesArr[drawIt - 1].length();
+		int spaces = longestName - namesArr[drawIt - 1].length() - drawIt/10;
 		std::cout << "|  " << drawIt << ") " << namesArr[drawIt - 1] << std::string(spaces, ' ') << " |\n";
 	}
 	std::cout << std::string(spacesInside, '-') << std::endl;
 }
 
-Handler::Handler()
+void Handler::clearUserInput()
 {
-
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cout << "\n Invalid input.\n";
+	system("pause");
 }
 
+Handler::Handler()
+{
+}
 
 Handler::~Handler()
 {

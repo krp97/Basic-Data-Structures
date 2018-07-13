@@ -79,7 +79,7 @@ void Array::pushBack(int value)
 void Array::pushAt(int value, int index)
 {
 	if (arrPtr == nullptr && index != 0)
-		throw EmptyArrException();
+		throw std::out_of_range("Empty array error.");
 	if (index <= size && index >= 0)					
 	{
 		if (index == 0)			// Reusing existing methods for boundary cases.
@@ -142,10 +142,11 @@ void Array::popFront()
 		{
 			delete[] arrPtr;
 			arrPtr = nullptr;
+			maxSize = 1;
 		}
 	}
 	else
-		throw EmptyArrException();
+		throw std::out_of_range("Empty array error.");
 }
 
 void Array::popBack()
@@ -170,16 +171,17 @@ void Array::popBack()
 		{
 			delete[] arrPtr;
 			arrPtr = nullptr;
+			maxSize = 1;
 		}
 	}
 	else
-		throw EmptyArrException();
+		throw std::out_of_range("Empty array error.");
 }
 
 void Array::popAt(int index)
 {
 	if (arrPtr == nullptr)
-		throw EmptyArrException();
+		throw std::out_of_range("Empty array error.");
 	if (index == 0)					// Reusing existing methods for boundary cases.
 		popFront();
 	else if (index == size - 1)
