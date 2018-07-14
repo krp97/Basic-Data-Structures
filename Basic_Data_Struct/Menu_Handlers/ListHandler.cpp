@@ -111,6 +111,7 @@ void ListHandler::initConsole()
 			case 8:
 			{
 				handleSaveToFile(myList);
+				break;
 			}
 			case 9:
 			{
