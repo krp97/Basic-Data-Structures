@@ -1,7 +1,7 @@
 #pragma once
 #include "Array.h"
 #include <string>
-class Stack : private Array
+class Stack : public Array
 {
 
 public:
@@ -17,6 +17,8 @@ public:
 	int find(int value) { return lookUpValue(value); };
 
 	virtual std::string toString();
+	virtual void loadFromFile(std::string fileName);
+
 	Stack();
 	~Stack();
 };

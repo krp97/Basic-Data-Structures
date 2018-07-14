@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Stack.h"
-
+#include <fstream>
 
 void Stack::pop()
 {
@@ -38,6 +38,36 @@ std::string Stack::toString()
 	else
 		return std::string();
 	return output;
+}
+
+void Stack::loadFromFile(std::string fileName)
+{
+	std::ifstream fileToRead;
+	std::string line;
+	int value = 0;
+
+	try {
+
+		fileToRead.open(fileName);
+
+		while (fileToRead.good())
+		{
+			fileToRead >> line;
+			try
+			{
+				value = stoi(line);
+			}
+			catch (std::invalid_argument& e)
+			{
+				fileToRead.close();
+				throw;
+			}
+			this->pushFront(value);
+		}
+	}
+	catch (std::ios_base::failure &fail) { throw; }
+
+	fileToRead.close();
 }
 
 Stack::Stack()

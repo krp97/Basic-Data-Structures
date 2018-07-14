@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-class Heap: private Array
+class Heap: public Array
 {
 	int getLeftChild(int index) { return 2 * index + 1; };
 	int getRightChild(int index) { return 2 * index + 2; };
@@ -21,6 +21,7 @@ public:
 	void popRoot();							
 
 	virtual std::string toString();
+	virtual void loadFromFile(std::string fileName);
 
 	Heap();
 	explicit Heap(Array arr);

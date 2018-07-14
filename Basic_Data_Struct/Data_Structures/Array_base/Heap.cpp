@@ -2,7 +2,7 @@
 #include "Heap.h"
 #include <Math.h>
 #include <iostream>
-
+#include <fstream>
 
 void Heap::insert(int value) 
 {
@@ -13,16 +13,15 @@ void Heap::insert(int value)
 		try { fixUp(size - 1); } 
 		catch (std::invalid_argument) { throw; }
 	}
-		
 }
 
 void Heap::remove(int value)
 {
 	int index = lookUpValue(value);
-
-	try 
-	{ 
+	try
+	{
 		swap(index, size - 1);
+		popBack();
 		fixDown(index);
 	}
 	catch (std::invalid_argument) { throw; }
@@ -70,19 +69,23 @@ void Heap::fixDown(int index)
 void Heap::fixUp(int index)
 {
 	int parent = getParent(index);
-	int otherChild = getLeftChild(parent);
-	int toSwap = index;
+	int leftChild = getLeftChild(parent);
+	int rightChild = getRightChild(parent);
+
+	int toSwap = leftChild;
 
 	if (parent == index)
 		return;
+	// If the rightChild exists, checking if it's bigger the leftChild.
 
-	if (otherChild == index && otherChild + 1 < size)
+	if (rightChild < size)
 	{
-		otherChild++;
-		if (arrPtr[toSwap] < arrPtr[otherChild])
-			toSwap = otherChild;
+		if (arrPtr[rightChild] > arrPtr[leftChild])
+			toSwap = rightChild;
 	}
-	
+	if (arrPtr[toSwap] < arrPtr[parent])
+		return;
+
 	if (toSwap < size)
 	{
 		try {
@@ -103,6 +106,42 @@ std::string Heap::toString()
 	else
 		return std::string();
 	return output;
+}
+
+void Heap::loadFromFile(std::string fileName)
+{
+	std::ifstream fileToRead;
+	std::string line;
+	int value = 0;
+
+	// All exceptions are rethrown for the caller to handle, or call apropriate handlers.
+	// In case of any error the input data is unusable, so there is no point in continuing.
+
+	try {
+
+		fileToRead.open(fileName);
+
+		while (fileToRead.good())
+		{
+			fileToRead >> line;
+			try
+			{
+				value = stoi(line);
+			}
+			catch (std::invalid_argument& e)
+			{
+				fileToRead.close();
+				throw;
+			}
+			this->insert(value);
+		}
+	}
+	catch (std::ios_base::failure &fail)
+	{
+		throw;
+	}
+
+	fileToRead.close();
 }
 
 Heap::Heap()

@@ -9,9 +9,9 @@ DLListHandler::DLListHandler()
 
 void DLListHandler::initConsole()
 {
-	int arraySize = 11;
-	std::string namesArr[11] = { "Push Back", "Push Front" , "Push At" , "Pop Back", "Pop Front", "Pop At", "Find value",
-		"Forward Traversal", "Backward Traversal", "Display", "Return" };
+	int arraySize = 12;
+	std::string namesArr[12] = { "Push Back", "Push Front" , "Push At" , "Pop Back", "Pop Front", "Pop At", 
+		"Load From File","Save To File", "Forward Traversal", "Backward Traversal", "Display", "Return" };
 
 	while (true)
 	{
@@ -20,90 +20,124 @@ void DLListHandler::initConsole()
 
 		int choice = 0;
 		std::cout << std::endl << " Your choice >> ";
-		std::cin >> choice;
+		if (std::cin >> choice)
+		{
 
-		switch (choice)
-		{
-		case 1:	// Push Back
-		{
-			int value;
-			std::cout << "\n Input value to push >> ";
-			std::cin >> value;
-			myDLList->pushBack(value);
-			break;
-		}
-		case 2:	// Push Front
-		{
-			int value;
-			std::cout << "\n Input value to push >> ";
-			std::cin >> value;
-			myDLList->pushFront(value);
-			break;
-		}
-		case 3: // Push At
-		{
-			int value, index;
-			std::cout << "\n Input value to push >> ";
-			std::cin >> value;
-			std::cout << "\n Input index to push at >>";
-			std::cin >> index;
-
-			try
+			switch (choice)
 			{
-				myDLList->pushAt(value, index);
-			}
-			catch (...)
+			case 1:	// Push Back
 			{
-				gotoXY(5, arraySize + 5);
-				std::cout << "\n Invalid input index.";
-				getchar();
+				int value;
+				std::cout << "\n Input value to push >> ";
+				if(std::cin >> value)
+					myDLList->pushBack(value);
+				else 
+					clearUserInput(); 
+
+				break;
 			}
-			break;
-		}
-		case 4: // Pop Back
-		{
-			try { myDLList->popBack(); }
-			catch (...) { std::cout << "\n The array is empty."; getchar(); }
-			break;
-		}
-		case 5: // Pop Front
-		{
-			gotoXY(5, arraySize + 3);
+			case 2:	// Push Front
+			{
+				int value;
+				std::cout << "\n Input value to push >> ";
+				if (std::cin >> value)
+					myDLList->pushFront(value);
+				else
+					clearUserInput();
+				break;
+			}
+			case 3: // Push At
+			{
+				int value, index;
+				std::cout << "\n Input value to push >> ";
+				if (std::cin >> value)
+				{
+					std::cout << "\n Input index to push at >>";
+					if (std::cin >> index)
+					{
+						try
+						{
+							myDLList->pushAt(value, index);
+						}
+						catch (...)
+						{
+							gotoXY(5, arraySize + 5);
+							std::cout << "\n Invalid input index.";
+							getchar();
+						}
+					}
+					else
+						clearUserInput();
+				}
+				else
+					clearUserInput();
+				break;
+			}
+			case 4: // Pop Back
+			{
+				try { myDLList->popBack(); }
+				catch (std::out_of_range) { std::cout << "\n The list is empty.\n"; system("pause");
+				}
+				break;
+			}
+			case 5: // Pop Front
+			{
+				gotoXY(5, arraySize + 3);
 
-			try { myDLList->popFront(); }
-			catch (...) { std::cout << "\n The array is empty."; getchar(); }
-			break;
-		}
-		case 6:	// Pop At
-		{
-			int index;
-			std::cout << "\n Input index to pop from >> ";
-			std::cin >> index;
+				try { myDLList->popFront(); }
+				catch (std::out_of_range) { std::cout << "\n The list is empty.\n"; system("pause");
+				}
+				break;
+			}
+			case 6:	// Pop At
+			{
+				int index;
+				std::cout << "\n Input index to pop from >> ";
+				if (std::cin >> index)
+				{
+					try { myDLList->popAt(index); }
+					catch (std::out_of_range) { std::cout << "\n Invalid input index.\n"; system("pause"); }
+				}
+				else
+					clearUserInput();
 
-			try { myDLList->popAt(index); }
-			catch (...) { "\n Invalid input index."; getchar(); }
-
-			break;
+				break;
+			}
+			case 7:
+			{
+				handleLoadFromFile(myDLList);
+				break;
+			}
+			case 8:
+			{
+				handleSaveToFile(myDLList);
+				break;
+			}
+			case 9: // Forward traversal
+			{
+				std::cout << "\n Forward traversal output >>\n";
+				std::cout << myDLList->forwardTravers() << std::endl;
+				system("pause");
+				break;
+			}
+			case 10: // Backward traversal
+			{
+				std::cout << "\n Backward traversal output >>\n";
+				std::cout << myDLList->backwardTravers() << std::endl;
+				system("pause");
+				break;
+			}
+			case 11: // Display
+			{
+				std::cout << "\nYour list >> \n " << myDLList->toString() << std::endl;
+				system("pause");
+				break;
+			}
+			case 12: { return; }
+			}
 		}
-		case 8: // Forward traversal
-		{
-			std::cout << "\n Your array >> \n " << myDLList->toString() << std::endl;
-			system("pause");
-			break;
-		}
-		case 9: // Backward traversal
-		{
-
-		}
-		case 10: // Display
-		{
-
-		}
-		case 11: // Exit
-		{
-			return;
-		}
-		}
+		else
+			clearUserInput();
 	}
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "../Data_Structures/DataStructure.h"
 #include <windows.h>
 class Handler
 {
@@ -13,6 +14,10 @@ public:
 	void drawMenu(std::string namesArr[], int size, std::string title);
 	void clearUserInput();
 
+	// These two methods look exactly the same for each handler.
+	void handleSaveToFile(DataStructure* dataStruct);
+	void handleLoadFromFile(DataStructure* dataStruct);
+	
 	Handler();
 
 	virtual ~Handler();

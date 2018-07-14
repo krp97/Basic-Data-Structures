@@ -2,8 +2,9 @@
 #include "NodeDL.h"
 #include "DLListIterator.h"
 #include <string>
+#include "List.h"
 
-class DoublyLinkedList
+class DoublyLinkedList : public List
 {
 	using iterator = DLListIterator;
 
@@ -38,6 +39,9 @@ public:
 	virtual void popAt(int index);	
 
 	virtual std::string toString();
+	
+	std::string forwardTravers();
+	std::string backwardTravers();
 
 	~DoublyLinkedList();
 };

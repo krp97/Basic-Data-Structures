@@ -72,7 +72,7 @@ void DoublyLinkedList::pushAt(int value, int index)
 {
 	if (size == 0)
 		throw EmptyListException();
-	else if(index > 0 && index <= size)
+	else if(index >= 0 && index <= size)
 	{
 		// Reusing the existing methods for similar actions.
 		if (index == 0)
@@ -94,7 +94,7 @@ void DoublyLinkedList::pushAt(int value, int index)
 void DoublyLinkedList::popFront()
 {
 	if (size == 0)
-		throw EmptyListException();
+		throw std::out_of_range("Empty list.");
 	else
 	{
 		// When the list isn't empty, 
@@ -119,7 +119,7 @@ void DoublyLinkedList::popFront()
 void DoublyLinkedList::popBack()
 {
 	if (size == 0)
-		throw EmptyListException();
+		throw std::out_of_range("Empty list.");
 	else
 	{
 		// Similar as in the case of popFront().
@@ -142,7 +142,7 @@ void DoublyLinkedList::popBack()
 void DoublyLinkedList::popAt(int index)
 {
 	if (size == 0)
-		throw EmptyListException();
+		throw std::out_of_range("Empty list.");
 	else if (index >= 0 && index <= size)
 	{
 		// Resuing existing methods for similar actions.
@@ -161,6 +161,7 @@ void DoublyLinkedList::popAt(int index)
 			(*list_it).prev->next = (*list_it).next;			
 
 			delete list_it.node;
+			size--;
 		}
 	}
 	else
@@ -179,6 +180,32 @@ std::string DoublyLinkedList::toString()
 		list_to_string += "<->";
 	}
 	return list_to_string;
+}
+
+std::string DoublyLinkedList::forwardTravers()
+{
+	std::string output;
+	for (auto list_it = begin(); list_it != end(); ++list_it)
+	{
+		output += (*list_it).toString();
+		if ((*list_it).next == nullptr)
+			continue;
+		output += "->";
+	}
+	return output;
+}
+
+std::string DoublyLinkedList::backwardTravers()
+{
+	std::string output;
+	for (auto list_it = rbegin(); list_it != rend(); --list_it)
+	{
+		output += (*list_it).toString();
+		if ((*list_it).prev == nullptr)
+			continue;
+		output += "->";
+	}
+	return output;
 }
 
 DoublyLinkedList::~DoublyLinkedList()

@@ -235,15 +235,6 @@ std::string Array::toString()
 	return output;
 }
 
-int Array::lookUpValue(int value)
-{
-	for (int arrIt = 0; arrIt < size; ++arrIt)
-		if (arrPtr[arrIt] == value)
-			return arrIt;
-
-	return -1;
-}
-
 void Array::loadFromFile(std::string fileName)
 {
 	std::ifstream fileToRead;
@@ -269,11 +260,6 @@ void Array::loadFromFile(std::string fileName)
 				fileToRead.close();
 				throw;
 			}
-			catch (...)
-			{
-				fileToRead.close();
-				throw;
-			}
 			this->pushBack(value);
 		}
 	}
@@ -288,14 +274,12 @@ void Array::loadFromFile(std::string fileName)
 void Array::saveToFile(std::string fileName)
 {
 	std::ofstream fileToWrite;
-	int * ptr = this->arrPtr;
-
 	try
 	{
 		fileToWrite.open(fileName);
 
 		for (int arrIt = 0; arrIt < this->size; ++arrIt)
-			fileToWrite << ptr[arrIt] << std::endl;
+			fileToWrite << arrPtr[arrIt] << std::endl;
 	}
 	catch (std::ios_base::failure &fail)
 	{

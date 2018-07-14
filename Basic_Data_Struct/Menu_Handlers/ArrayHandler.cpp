@@ -6,8 +6,9 @@
 
 void ArrayHandler::initConsole()
 {
-	int arraySize = 9;
-	std::string namesArr[9] = { "Push Back", "Push Front" , "Push At" , "Pop Back", "Pop Front", "Pop At", "Find value", "Display", "Return" };
+	int arraySize = 10;
+	std::string namesArr[10] = { "Push Back", "Push Front" , "Push At" , "Pop Back", "Pop Front", "Pop At", 
+		"Display", "Load From File","Save To File", "Return" };
 	
 	while (true)
 	{
@@ -87,7 +88,7 @@ void ArrayHandler::initConsole()
 
 				break;
 			}
-			case 6:
+			case 6: // Pop At
 			{
 				int index;
 				std::cout << "\n Input index to pop from >> ";
@@ -101,17 +102,23 @@ void ArrayHandler::initConsole()
 					clearUserInput();
 				break;
 			}
-			case 7:	// lookupValue
+			case 7:
 			{
+				std::cout << "\n Your array >> \n " << myArray->toString() << std::endl;
+				system("pause");
 				break;
 			}
 			case 8:
 			{
-				std::cout << "\n Your array >> \n " << myArray->toString() << std::endl;
-				getchar();
+				handleLoadFromFile(myArray);
 				break;
 			}
-			case 9: {return; }
+			case 9:
+			{
+				handleSaveToFile(myArray);
+				break;
+			}
+			case 10: {return; }
 			}
 		}
 		else{ clearUserInput();}

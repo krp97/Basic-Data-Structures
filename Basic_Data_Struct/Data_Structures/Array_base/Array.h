@@ -37,10 +37,8 @@ public:
 
 	virtual std::string toString();						
 		
-	int lookUpValue(int value);			
-
-	void loadFromFile(std::string fileName);
-	void saveToFile(std::string fileName);
+	virtual void loadFromFile(std::string fileName);
+	virtual void saveToFile(std::string fileName);
 
 	Array();
 	explicit Array(int statArr [], int size);

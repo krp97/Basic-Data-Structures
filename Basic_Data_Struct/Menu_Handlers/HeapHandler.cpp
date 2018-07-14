@@ -9,8 +9,8 @@ HeapHandler::HeapHandler()
 
 void HeapHandler::initConsole()
 {
-	int arraySize = 6;
-	std::string namesArr[6] = { "Insert", "Remove" , "Peek Root" , "Pop Root", "Display", "Return" };
+	int arraySize = 8;
+	std::string namesArr[8] = { "Insert", "Remove" , "Peek Root" , "Pop Root", "Display", "Load From File", "Save To File", "Return" };
 
 	while (true)
 	{
@@ -45,7 +45,7 @@ void HeapHandler::initConsole()
 					try {
 						myHeap->remove(value);
 					}
-					catch (std::invalid_argument) { std::cout << "Invalid operation.\n"; system("pause"); }
+					catch (std::invalid_argument) { std::cout << "Invalid value.\n"; system("pause"); }
 				}
 				else
 					clearUserInput();
@@ -69,7 +69,17 @@ void HeapHandler::initConsole()
 				system("pause");
 				break;
 			}
-			case 6: { return; }
+			case 6:
+			{
+				handleLoadFromFile(myHeap);
+				break;
+			}
+			case 7:
+			{
+				handleSaveToFile(myHeap);
+				break;
+			}
+			case 8: { return; }
 			}
 		}
 		else

@@ -2,6 +2,7 @@
 #include "List.h"
 #include <iterator>
 #include "ListIterator.h"
+#include <fstream>
 
 List::List()
 {
@@ -138,6 +139,49 @@ std::string List::toString()
 		list_to_string += (*list_iter).toString() + " -> ";
 	}
 	return list_to_string;
+}
+
+void List::loadFromFile(std::string fileName)
+{
+	std::ifstream fileToRead;
+	std::string line;
+	int value = 0;
+
+	try {
+
+		fileToRead.open(fileName);
+
+		while (fileToRead.good())
+		{
+			fileToRead >> line;
+			try
+			{
+				value = stoi(line);
+			}
+			catch (std::invalid_argument& e)
+			{
+				fileToRead.close();
+				throw;
+			}
+			this->pushBack(value);
+		}
+	}
+	catch (std::ios_base::failure &fail) { throw; }
+
+	fileToRead.close();
+}
+
+void List::saveToFile(std::string fileName)
+{
+	std::ofstream fileToWrite;
+	try
+	{
+		fileToWrite.open(fileName);
+		for (auto list_it = begin(); list_it != end(); ++list_it)
+			fileToWrite << (*list_it).value << std::endl;
+	}
+	catch (std::ios_base::failure &fail) { throw; }
+	fileToWrite.close();
 }
 
 List::~List()

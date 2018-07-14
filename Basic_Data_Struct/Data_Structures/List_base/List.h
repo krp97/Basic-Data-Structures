@@ -2,7 +2,8 @@
 #include "Node.h"
 #include <string>
 #include "ListIterator.h"
-class List
+#include "..\DataStructure.h"
+class List : public DataStructure
 {
 	using iterator = ListIterator;
 
@@ -32,6 +33,9 @@ public:
 	virtual void popAt(int index);
 	
 	virtual std::string toString();
+
+	void loadFromFile(std::string fileName);
+	void saveToFile(std::string fileName);
 
 	~List();
 };

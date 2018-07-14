@@ -46,3 +46,8 @@
 	- Started to implement user input correction for the menus
 	- Fixed bugs in the Array structure
 	- Minor logic changes (Handler class access modifiers)
+
+8) 14 July, 2018
+
+	- Finalized implementation of menu handlers
+	- Introduced text file functions for each structure

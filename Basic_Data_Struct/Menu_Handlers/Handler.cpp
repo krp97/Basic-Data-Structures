@@ -90,7 +90,8 @@ void Handler::drawMenu(std::string namesArr[], int size, std::string title)
 	std::cout << std::endl;
 	// Each line has a form of : "|  1) title |".
 	// All lines are adjusted towards the longest subtitles.
-
+	if (size / 10 == 1)
+		longestName++;
 	for (int drawIt = 1; drawIt <= size; ++drawIt)
 	{
 		int spaces = longestName - namesArr[drawIt - 1].length() - drawIt/10;
@@ -105,6 +106,36 @@ void Handler::clearUserInput()
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "\n Invalid input.\n";
 	system("pause");
+}
+
+void Handler::handleSaveToFile(DataStructure * dataStruct)
+{
+	std::string fileName;
+	std::cout << "Please input your file's name >> ";
+	std::cin >> fileName;
+
+	try { dataStruct->saveToFile(fileName); }
+	catch (std::ios_base::failure) {
+		std::cout << "Please check your file's location and name.\n";
+		system("pause");
+	}
+}
+
+void Handler::handleLoadFromFile(DataStructure * dataStruct)
+{
+	std::string fileName;
+	std::cout << "Please input your file's name >> ";
+	std::cin >> fileName;
+
+	try { dataStruct->loadFromFile(fileName); }
+	catch (std::invalid_argument) {
+		std::cout << "Please check your file's contents.\n";
+		system("pause");
+	}
+	catch (std::ios_base::failure) {
+		std::cout << "Please check your file's location and name.\n";
+		system("pause");
+	}
 }
 
 Handler::Handler()
