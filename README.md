@@ -62,7 +62,3 @@ Implemented as a class wrapper for an Array. It doesn't introduce any new functi
 Each commit is stamped with a date which can be looked up in the *UpdateLog* file,
 for information about specific changes.
 
-## Miscellaneous
-Visual Studio's IntelliSense highlights the precompiled header "stdafx.h" with an error, however the project compiles without related warnings or errors. The problem started occuring during files reorganization and was later fixed with [this solution](https://stackoverflow.com/a/37709456).
-
-
