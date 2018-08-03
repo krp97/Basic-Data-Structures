@@ -1,11 +1,11 @@
 
+
 # Basic-Data-Structures
-## Author: Krystian Plata
 
 ## Tools used:
 * Microsoft Visual Studio 2017
 * Visual Memory Leak Detector - [available here](https://archive.codeplex.com/?p=vld).
-The "vld.h" is already included in the project for future debugging.
+VLD header file has been left included in the main handler, because it does not affect the release version of the project.
 
 ## Project description
 This implementation is a a partial result of a course "Data Structures and Computational Complexity".
@@ -20,43 +20,35 @@ The Red and Black Tree was also required, however it was decided to move it to a
 of this project - "Data Structures", and introduce the Stack instead.
 
 ## Structures overview
+Base class for all implemented structures is a **Data_Structure** class. It provides basic attributes and a **to_string()** method for easier output handling in the menu.
 
-### Data Structure
-This abstract class was meant to be a highest level of relation tree.
-It implements a pure virtual method : toString() and an attribute "size", 
-by which every structure should be characterized.
-Links used:
-* [Abstract Classes](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.cbclx01/cplr142.htm)
-*  Pure Virtual Functions: [Wikipedia](https://en.wikipedia.org/wiki/Virtual_function) and [cppreference](https://en.cppreference.com/w/cpp/language/abstract_class)
+All structures are divided into two groups:
+* Array based 
+* List Based
 
-### Array
-Sizes of the Array are consecutive powers of 2,
-in order to achieve the least amount of memory accesses per insertion/deletion.
+These groups were meant to provide a clear distinction between classes in the file hierarchy.
+### Array Based Structures
+This group includes following structures:
+* Array
+* Heap
+* Stack
 
-### Node
-Basic unit of a List structure.
-It contains a value(key) and a pointer to a next node in the list.
+Memory operations on the array have been optimized in a way that the size expands and shrinks according to the consecutive powers of 2. The idea comes from the implementation of a vector within the STL library.
 
-### NodeDL
-Direct child of Node, serves as a basic unit of a Doubly Linked List structure.
-Apart from parents attributes, it also contains a pointer to a previous node in the list.
+The **Heap** and **Stack** serve as extensions to already existing **Array** class.
+While **Stack** is simply a class wrapper that provides the user with a clean public interface, **Heap** introduces a couple of methods concerning sorting and proper heap representation.
 
-### List
-Implements methods for handling a group of **Node** objects.
-In order to provide better traversal of a list, a forward iterator has been implemented - **ListIterator**.
-Links used:
-* Iterators: [cppreference](https://en.cppreference.com/w/cpp/iterator), [Tobias Anderberg's Blog](http://anderberg.me/2016/07/04/c-custom-iterators/)
+### List Based Structures
 
-### Doubly Linked List
-Quite similar to a List structure, however it provides a possibility of bidirectional traversal.
-Similary to **List**, an iterator has been provided - **DLListIterator**(Bidirectional).
+This group includes following structures:
+* Singly-Linked List
+* Doubly-Linked List
 
-### Heap
-Main idea behind this structure is to provide an extension to an already existing **Array** class.
-The extension being sorting methods and interfacing with the structure.
+The access to specific nodes has been simplified with an iterator implementation:
+* Singly-Linked List - Forward Iterator
+* Doubly-Linked List - Bidirectional Iterator
 
-### Stack
-Implemented as a class wrapper for an Array. It doesn't introduce any new functionalities on top of what is already introduced in an **Array** class. It's main functionality is to clearly present operations available for a stack structure based on an array.
+Doubly Linked List is also an extension of a Singly-Linked List class, however it has to reimplement all handling methods because of bidirectional access.
 
 ## Updates
 Each commit is stamped with a date which can be looked up in the *UpdateLog* file,
