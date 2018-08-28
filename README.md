@@ -16,8 +16,8 @@ This project's requirements were as following:
 	* Array
 	* Heap 
 2. All of the above are to be developed without the use of libraries such as: STL or Boost.
-The Red and Black Tree was also required, however it was decided to move it to a second part
-of this project - "Data Structures", and introduce the Stack instead.
+The BST and AVL trees were also required, however it was decided to move it to a second part
+of this project - [Binary_Trees](https://github.com/krp97/Binary_Trees), and introduce the Stack instead.
 
 ## Structures overview
 Base class for all implemented structures is a **Data_Structure** class. It provides basic attributes and a **to_string()** method for easier output handling in the menu.
